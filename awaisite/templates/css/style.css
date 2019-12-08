@@ -1,0 +1,62 @@
+
+body
+{
+	font: 1em "Segoe UI", Helvetica, Arial, sans-serif;
+
+}
+/* Logo header */
+h1#header
+{
+	height: 320px ;
+	margin: 0;
+	background: url(images/logo.png) no-repeat top ;
+}
+
+/* couleur navbar */
+.bg-custom
+{
+	background-color: #800000;
+}
+
+/* titres/paragraphes*/
+
+h2
+{
+	text-align: left ;
+	line-height: 40px ;
+	font-size: 1.4em ;
+	color: #800000 ;
+	border-bottom: 1px solid #800000 ;
+}
+
+ h3
+{
+	text-align: left ;
+	line-height: 40px ;
+	font-size: 1em ;
+	color: #800000 ;
+	border-bottom: 1px solid #800000 ;
+}
+
+/* Miscellaneous */
+.left
+{
+	margin: 20 auto ;
+	text-align: left ;
+	border: 2px solid #800000 ;
+	background: #fff ;
+}
+
+.right
+{
+	margin: 20 auto ;
+	text-align: left ;
+	border: 2px solid #800000 ;
+	background: #fff ;
+}
+
+.btn
+{
+	margin: 20 auto;
+	background-color: #800000;
+} 
