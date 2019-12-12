@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from awaisite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+	path('inscription/', views.inscription),
+	path('inscription2/', views.inscription2),
+	path('thanks/', views.thanks),
 ]
