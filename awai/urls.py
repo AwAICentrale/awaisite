@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+<<<<<<< HEAD
 from django.urls import path
 from awaisite import views
 
@@ -22,4 +23,11 @@ urlpatterns = [
 	path('inscription/', views.inscription),
 	path('inscription2/', views.inscription2),
 	path('thanks/', views.thanks),
+=======
+from django.urls import include, path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('awaisite/', include('awaisite.urls')),
+>>>>>>> 1b7825ff394568b2056148336500337ec2be3f5a
 ]
