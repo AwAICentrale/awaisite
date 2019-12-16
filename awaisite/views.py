@@ -3,7 +3,10 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Bienvenue sur le site awai !")
+    return render(request, 'base_generic.html', )
+
+def accueil(request):
+    return render(request, 'awaisite/accueil.html',)
 
 def profil(request):
     #question = get_object_or_404(Question, pk=question_id)

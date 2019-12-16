@@ -6,6 +6,7 @@ app_name = 'awaisite'
 
 urlpatterns = [
     path('', views.index, name=('index')),
+    path('accueil', views.accueil, name=('accueil')),
     path('profil', views.profil, name=('profil')),
     path('regles_jeu', views.regles, name=('regles_jeu')),
     path('strategie', views.strategie, name=('strategie')),

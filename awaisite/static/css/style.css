@@ -9,14 +9,15 @@ h1#header
 {
 	height: 320px ;
 	margin: 0;
-	background: url(images/logo.png) no-repeat top ;
+	background: url(../images/logo.png) no-repeat top ;
 }
 
-/* couleur navbar */
+/* navbar */
 .bg-custom
 {
 	background-color: #800000;
 }
+
 
 /* titres/paragraphes*/
 
