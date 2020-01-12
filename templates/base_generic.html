@@ -27,14 +27,14 @@
             <!-- Links -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'awaisite:accueil' %}">Accueil <span
+                    <a class="nav-link" href="{% url 'core:accueil' %}">Accueil <span
                             class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'awaisite:regles_jeu' %}">Règles</a>
+                    <a class="nav-link" href="{% url 'core:regles_jeu' %}">Règles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'awaisite:strategie' %}">Stratégie</a>
+                    <a class="nav-link" href="{% url 'core:strategie' %}">Stratégie</a>
                 </li>
                 <!-- Dropdown -->
                 <li class="nav-item dropdown">
@@ -43,12 +43,12 @@
                         Jouer
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{% url 'awaisite:jouerIA' %}">Contre l'IA</a>
+                        <a class="dropdown-item" href="{% url 'core:jouerIA' %}">Contre l'IA</a>
                         <a class="dropdown-item" href="#">Contre un autre joueur</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'awaisite:profil' %}">Mon profil</a>
+                    <a class="nav-link" href="{% url 'core:profil' %}">Mon profil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Forums</a>
