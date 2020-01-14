@@ -1,3 +1,5 @@
+{% extends "../base_generic.html" %}
+{%  block content %}
 <!DOCTYPE html">
 <html lang="fr">
   <head>
@@ -25,45 +27,7 @@ width: 636px ;
     	<!-- logo -->
     	<h1 id="header"><a href="#" title=""><span></span></a></h1>
 
-<!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
 
-      <!-- Navbar brand -->
-      <a class="navbar-brand" href="#">Menu</a>
-
-      <!-- Collapse button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Règles</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Stratégie</a>
-          </li>
-          <!-- Dropdown -->
-          <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">Jouer</a>
-              <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink1">
-                <a class="dropdown-item" href="#">Contre l'IA</a>
-                <a class="dropdown-item" href="#">Contre un autre joueur</a>
-              </div>
-            </li>
-            </div>
-          </li>
-        </ul>
-          </div>
-        </form>
-      </div>
-    </nav>
 
   </div>
 
@@ -99,3 +63,4 @@ width: 636px ;
 </html>
 
 
+{%  endblock %}
