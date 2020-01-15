@@ -1,6 +1,7 @@
 {% extends "../base_generic.html" %}
 
 {% block content %}
+    {% load static %}
     <p><strong><h2> Stratégies </h2></strong></p>
 
 
@@ -13,8 +14,7 @@
         aussi à l’esprit la présence d’un public bruyant,, pouvant recommander un coup donné. Avant de passer aux
         stratégies possibles, choisissons cette représentation d’un plateau d’Awalé, avec les cases numérotées comme
         ci-dessous : </p>
-        {%  load static %}
-    <img src={% static "orientation.png" %}>
+    <img src="{% static "images/orientation.png" %}">
 
     <p> <h3> Stratégies d'ouverture</h3> </p>
 
@@ -46,7 +46,7 @@
     <p> Dans la première image ci-dessous, S menace clairement N grâce à sa case 6 qui peut manger la case 2 de N. Dans
         la deuxième image, S menace N par 6 et par sa case 1 également. </p>
 
-    <img src={% static "menaces.png" %}>
+    <img src="{% static "images/menaces.png" %}">
 
     <p> <h4> Krou </h4> </p>
 
@@ -55,7 +55,7 @@
         créer dans des cases vides avant le coup des lots de 2 graines si elles sont visitées deux fois. Là, S va gagner
         3 + 2 + 3 = 8 graines d’un coup grâce à sa case 5 contenant 15 graines. </p>
 
-    <img src={% static "krou.png" %}>
+    <img src="{% static "images/krou.png" %}">
 
     <p> <h4> Appât </h4> </p>
 
@@ -63,30 +63,30 @@
         récolter 2 + 1 = 3 graines. Or, après, le joueur S peut récolter grâce à sa case 5 2 + 3 + 2 = 7 graines d’un
         coup ! </p>
 
-    <img src={% static "appat.png" %}>
+    <img src="{% static "images/appat.png" %}">
 
     <p> <h4> Exemple de piège simple : la configuration 3-0-1 </h4> </p>
 
     <p> S’il reste peu de graines sur le plateau, il est possible de tendre des pièges, comme celui présenté ci-dessous.
         Le joueur S parvient à récolter deux graines en ne laissant plus le choix au joueur N. </p>
 
-    <img src={% static "piege_simple.png" %}>
+    <img src="{% static "images/piege_simple.png" %}">
 
     <p> <h4> Exemple de piège fatal : la configuration 2-2-1 </h4> </p>
 
     <p> Ici, quel que soit le coup du joueur N, la situation ne sera favorable qu’au joueur S. </p>
 
-    <img src={% static "piege_fatal.png" %}>
+    <img src="{% static "images/piege_fatal.png" %}">
 
     <p> Quelques stratégies supplémentaires sont possibles. </p>
 
     <p> <h4> Surcharge de la case menaçante </h4> </p>
 
-    <img src={% static "case_menaçante.png" %}>
+    <img src="{% static "images/case_menaçante.png" %}">
 
     <p> <h4> Contre-attaque </h4> </p>
 
-    <img src={% static "contre_attaque.png" %}>
+    <img src="{% static "images/contre_attaque.png" %}">
 
     <p> <h3> Astuces diverses </h3> </p>
 
@@ -94,7 +94,7 @@
         <li> Déterminer si une case est menaçante ou menacée : Repérer les cases contenant 1 ou 2 graines, puis faire un
             compte à rebours dans le sens horaire à partir de celles-ci. Si une case rencontrée au compteur i comporte i
             graines, alors elle est menaçante (du côté de l’adversaire) ou menacée (de notre côté).
-            <img src={% static "astuce.png" %}>
+            <img src="{% static "images/astuce.png" %}">
             Ici, la case 1 du joueur Sud est clairement menacée par la case 5 du joueur Nord.
         </li>
         <li>Utiliser les congruences modulo 11 (exemple : le krou).</li>
