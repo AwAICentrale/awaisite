@@ -56,7 +56,7 @@ for (var i = 0; i < cases.length; i++) {//supression de graines
 		
 		cases[i].addEventListener("contextmenu", function(){
 
-			alert(10);			
+						
 			var quantite1 =	parseInt(this.getAttribute("quantite"))		
 						
 			if(quantite1!= 0){
