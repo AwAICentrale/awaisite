@@ -1,94 +1,396 @@
-
 <html>
 
 <style>
-body {
-padding:10px;
-background-image: url("../../core/static/images/gui_plateau.png");
-background-repeat: no-repeat;
-background-size: 1300px 600px;
-background-position: -10px 100px;
-
-}
+    body {
+        padding: 10px;
+        background-image: url("../../core/static/images/gui_plateau.png");
+        background-repeat: no-repeat;
+        background-size: 1300px 600px;
+        background-position: -10px 100px;
+    }
 </style>
 
 <head>
-	<title>Jeu</title>
+    <title>Jeu</title>
 
-	<style type="text/css">
-		
-		#mostrador{
-			margin: auto;
-			margin: 40px;
-			width: 252px;
-			height: 80px;
+    <style type="text/css">
+        .case {
+            width: 180px;
+            height: 180px;
+            padding-top: 20px;
+            border: 2px;
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            text-align: center;
+        }
 
+        .case1 {
+            position: absolute;
+            top: 140;
+            left: 60;
+        }
 
-		}
+        .case2 {
+            position: absolute;
+            top: 140;
+            left: 263;
+        }
 
+        .case3 {
+            position: absolute;
+            top: 140;
+            left: 466;
+        }
 
-		.case{
-			margin-top: 1110px;
-			margin-right: 0px;
-			width:110px;
-			height: 125px;
-			float: left;
-			padding-top: 20px;
-                        border:2px ;
-			border-radius:50%;
-			-moz-border-radius:50%;
-			-webkit-border-radius:50%;
-			margin-left: 80px;
-			border:2px;
-			margin-top: -10px;
-			margin-bottom: 140px;
+        .case4 {
+            position: absolute;
+            top: 140;
+            left: 660;
+        }
 
-		}
-		
+        .case5 {
+            position: absolute;
+            top: 140;
+            left: 850;
+        }
 
+        .case6 {
+            position: absolute;
+            top: 155;
+            left: 1035;
+        }
 
+        .case7 {
+            position: absolute;
+            top: 430;
+            left: 35;
+        }
 
-		.plateau{
-			width: 1200px;
-			height: 308px;
-			
+        .case8 {
+            position: absolute;
+            top: 430;
+            left: 232;
+        }
 
-		}
+        .case9 {
+            position: absolute;
+            top: 430;
+            left: 422;
+        }
 
+        .case10 {
+            position: absolute;
+            top: 430;
+            left: 629;
+        }
 
-	</style>
+        .case11 {
+            position: absolute;
+            top: 430;
+            left: 842;
+        }
 
+        .case12 {
+            position: absolute;
+            top: 430;
+            left: 1052;
+        }
+
+        .set {
+            border: 0;
+            line-height: 2.5;
+            padding: 0 20px;
+            font-size: 30;
+            text-align: center;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            background-color: rgba(220, 0, 0, 1);
+            background-image: linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0));
+            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+            width: 80;
+            height: 80px;
+            float: left;
+            text-align: center;
+            padding-top: 20px;
+	    margin-left:75;
+	    margin-bottom:550;
+
+        }
+
+        .plateau {
+            width: 1300px;
+            height: 308px;
+        }
+    </style>
 
 </head>
 
-<body>	
-	
-	<div id="mostrador">
-		<p style="float: left; margin-right: 10px;"></p>
-
-	</div>
-
-	<div class="plateau">
-
-		<div id="a1" class="case" quantite="0"></div>
-		<div id="a2" class="case" quantite="0"></div>
-		<div id="a3" class="case" quantite="0"></div>
-		<div id="a4" class="case" quantite="0"></div>
-		<div id="a5" class="case" quantite="0"></div>
-		<div id="a6" class="case" quantite="0"></div>
-		<div id="b1" class="case" quantite="0"></div>
-		<div id="b2" class="case" quantite="0"></div>
-		<div id="b3" class="case" quantite="0"></div>
-		<div id="b4" class="case" quantite="0"></div>
-		<div id="b5" class="case" quantite="0"></div>
-		<div id="b6" class="case" quantite="0"></div>
-
-		
-
-	</div>
-
-   <script type="text/javascript" src='../../core/static/js/gui.js'></script>
+<body>
 
 
+
+    <div class="plateau">
+
+        <div id="a1" class="case case1" quantite="0" set="0"><img id='p1' src="../../core/static/images/gui_graine4.png" width="160" height="160" ></div>
+        <div id="a2" class="case case2" quantite="0" set="1"><img id='p2' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a3" class="case case3" quantite="0" set="2"><img id='p3' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a4" class="case case4" quantite="0" set="3"><img id='p4' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a5" class="case case5" quantite="0" set="4"><img id='p5' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a6" class="case case6" quantite="0" set="5"><img id='p6' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a7" class="case case7" quantite="0" set="7"><img id='p7' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a8" class="case case8" quantite="0" set="8"><img id='p8' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a9" class="case case9" quantite="0" set="9"><img id='p9' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a10" class="case case10" quantite="0" set="10"><img id='p10' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a11" class="case case11" quantite="0" set="11"><img id='p11' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a12" class="case case12" quantite="0"set="12"><img id='p12' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+
+        <div id="d1" class="set" case="0">4</div>
+        <div id="d2" class="set" case="1">4</div>
+        <div id="d3" class="set" case="2">4</div>
+        <div id="d4" class="set" case="3">4</div>
+        <div id="d5" class="set" case="4">4</div>
+        <div id="d6" class="set" case="5">4</div>
+        <div id="d7" class="set" case="6">4</div>
+        <div id="d8" class="set" case="7">4</div>
+        <div id="d9" class="set" case="8">4</div>
+        <div id="d10" class="set" case="9">4</div>
+        <div id="d11" class="set" case="10">4</div>
+        <div id="d12" class="set" case="11">4</div>
+
+    </div>
+<script
+			type="text/javascript"
+			src="brython.js">
+		</script>
+		<script
+			type="text/javascript"
+			src="brython_stdlib.js">
+		</script>
+	</head>
+	<body onload="brython()">
+
+	</body>
+    <script type="text/javascript" src=''></script>
+<script type="text/python">
+# -*- coding: utf-8 -*-
+"""
+Created on Wed May 29 13:26:36 2019
+
+@author: ninos
+"""
+
+
+import copy
+from browser import document,bind
+
+
+class Board:
+    def __init__(self):
+        self.board = [4 for i in range(12)]
+        self.player = 0
+        self.grenier = [0,0]
+
+    def __repr__(self):
+        s="  =======================================\n"
+        s+="  ||"
+        for k in range(11, 5, -1):              #la partie haute
+            if self.board[k]//10 == 0:
+                s+=" " + str(self.board[k])+ "  | "
+            else:                               #si le nb de graine est >= 10
+                s+=" "+ str(self.board[k])+ " | "
+        s+="|\n"
+        s+="  =======================================\n"
+        s+="  ||"
+        for k in range(6):                      #la partie basse
+            if self.board[k]//10 == 0:
+                s+=" " + str(self.board[k])+ "  | "
+            else:                               #si le nb de graine est >= 10
+                s+=" "+ str(self.board[k])+ " | "
+        s+="|\n  ======================================="
+        return s
+
+    def play(self,pit):
+        """Function to use in order to play a move on the Board
+        It takes one argument : number of the pit wanted to be played"""
+        rslt=self.allowed(pit)
+        if rslt=="END":
+            return "END"
+        elif rslt == False:
+            return None
+        else:
+            return self.move(pit)
+
+
+
+    def allowed(self, pit):
+        """Function checking if the move is licit or not
+        Takes one arguments : number of the pit wanted to be played
+        """
+        if (pit not in range(1,7)) or self.board[pit-1+6*self.player]==0: # Pit not included in [1,6] or pit wanted is empty
+            return False
+        cb = copy.deepcopy(self)
+        cb.move(pit)#We play
+        if not cb.emptySide(6*(cb.player)): #if opponent's side is not empty
+            return True
+        else : # we need to know if there are licit moves
+            for coupSimule in range(1, 7):
+                db = copy.deepcopy(self) #For move we do a copy of the board (we don't want to change the original board)
+                if coupSimule != pit: # moves different from pit
+                    db.move(coupSimule)
+                    if not(db.emptySide(6*db.player)):    #there is a other move that does'nt starve the opponent
+                        return False                    #so the move is not licit
+                return "END" #It means the move has to be played but it ends the game
+        return True
+
+    def move(self,pit):
+        """Function moving the seeds on the board and
+        It takes one argument : number of the last pit visited
+        returns number of seeds captured"""
+
+        pit = pit-1+6*self.player
+        nbSeeds = self.board[pit]       #saving the number of seeds to sow
+        self.board[pit] = 0
+        p0 = pit
+        while nbSeeds > 0:
+            p0 = (p0 + 1)%12
+            if p0 != pit:           #We don't put any seeds in the starting pit
+                self.board[p0] += 1
+                nbSeeds-=1
+        sG= self.seedsGain(p0)    #
+        self.grenier[self.player] +=sG
+        self.player = 1 -self.player
+        return sG
+
+    def seedsGain(self,lastPit):
+        """Function deleting all seeds captured by a player
+        It takes one argument : number of the last pit visited
+        returns the number of seeds captured"""
+        seeds=0
+        while (6*(1-self.player) <= lastPit <= 5+6*(1-self.player)) and (2 <= self.board[lastPit] <= 3):
+            seeds += self.board[lastPit]
+            self.board[lastPit] = 0
+            lastPit -= 1
+        return seeds
+
+
+    def emptySide(self,ps):
+        """Function looking if the side which first pit is ps is empty
+        It takes one argument : ps"""
+        for k in range(ps, ps+6):
+            if self.board[k] != 0:
+                return False
+        return True
+
+class Game:
+    def __init__(self,nbSeedsEnd=8):
+        self.b = Board()
+
+        self.nbSeedsEnd=nbSeedsEnd
+
+    def runGame(self,i):
+	print(i)
+        while sum(self.b.grenier)<48-self.nbSeedsEnd and max(self.b.grenier[0],self.b.grenier[1])<=24:
+            print(self.b)
+            notInt=True
+            while notInt:
+
+                answ = i
+                if answ =="quit":
+                    return False
+                try:
+                    pit=int(answ)
+                    notInt=False
+                except: pass
+            rsltMove = self.b.play(pit)
+
+            document["p1"].src = "../../core/static/images/gui_graine"+str(self.b.board[11])+".png"
+            document["d1"].text=str(self.b.board[11])
+            document["p2"].src = "../../core/static/images/gui_graine"+str(self.b.board[10])+".png"
+            document["d2"].text=str(self.b.board[10])
+            document["p3"].src = "../../core/static/images/gui_graine"+str(self.b.board[9])+".png"
+            document["d3"].text=str(self.b.board[9])
+            document["p4"].src = "../../core/static/images/gui_graine"+str(self.b.board[8])+".png"
+            document["d4"].text=str(self.b.board[8])
+            document["p5"].src = "../../core/static/images/gui_graine"+str(self.b.board[7])+".png"
+            document["d5"].text=str(self.b.board[7])
+            document["p6"].src = "../../core/static/images/gui_graine"+str(self.b.board[6])+".png"
+            document["d6"].text=str(self.b.board[6])
+            document["p7"].src = "../../core/static/images/gui_graine"+str(self.b.board[0])+".png"
+            document["d7"].text=str(self.b.board[0])
+            document["p8"].src = "../../core/static/images/gui_graine"+str(self.b.board[1])+".png"
+            document["d8"].text=str(self.b.board[1])
+            document["p9"].src = "../../core/static/images/gui_graine"+str(self.b.board[2])+".png"
+            document["d9"].text=str(self.b.board[2])
+            document["p10"].src = "../../core/static/images/gui_graine"+str(self.b.board[3])+".png"
+            document["d10"].text=str(self.b.board[3])
+            document["p11"].src = "../../core/static/images/gui_graine"+str(self.b.board[4])+".png"
+            document["d11"].text=str(self.b.board[4])
+            document["p12"].src = "../../core/static/images/gui_graine"+str(self.b.board[5])+".png"
+            document["d12"].text=str(self.b.board[5])
+            if rsltMove =="END":
+
+                self.b.grenier[self.b.player]+=(48-sum(self.b.grenier))
+            else:
+                print("")
+	    break
+	print(self.b)
+
+
+        return self.b.grenier.index(max(self.b.grenier)) #return nb of the winner
+g=Game()
+def montre1(ev):
+    g.runGame(6)
+def montre2(ev):
+    g.runGame(5)
+def montre3(ev):
+    g.runGame(4)
+def montre4(ev):
+    g.runGame(3)
+def montre5(ev):
+    g.runGame(2)
+def montre6(ev):
+    g.runGame(1)
+def montre7(ev):
+    g.runGame(1)
+def montre8(ev):
+    g.runGame(2)
+def montre9(ev):
+    g.runGame(3)
+def montre10(ev):
+    g.runGame(4)
+def montre11(ev):
+    g.runGame(5)
+def montre12(ev):
+    g.runGame(6)
+a1 = data = document["a1"]
+a1.bind("click", montre1)
+a2 = data = document["a2"]
+a2.bind("click", montre2)
+a3 = data = document["a3"]
+a3.bind("click", montre3)
+a4 = data = document["a4"]
+a4.bind("click", montre4)
+a5 = data = document["a5"]
+a5.bind("click", montre5)
+a6 = data = document["a6"]
+a6.bind("click", montre6)
+a7 = data = document["a7"]
+a7.bind("click", montre7)
+a8 = data = document["a8"]
+a8.bind("click", montre8)
+a9 = data = document["a9"]
+a9.bind("click", montre9)
+a10 = data = document["a10"]
+a10.bind("click", montre10)
+a11 = data = document["a11"]
+a11.bind("click", montre11)
+a12 = data = document["a12"]
+a12.bind("click", montre12)
+
+
+    </script>
 </body>
+
 </html>
