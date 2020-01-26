@@ -47,13 +47,32 @@
                         <a class="dropdown-item" href="#">Contre un autre joueur</a>
                     </div>
                 </li>
+                {#                <li class="nav-item">#}
+                {#                    <a class="nav-link" href="{% url 'core:profil' %}">Mon profil</a>#}
+                {#                </li>#}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'core:profil' %}">Mon profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://testawai.000webhostapp.com/phpBB3/?fbclid=IwAR3qp_W7ryX-q-POH9-FNzKP0cjA62FXDoet-EcUn-1aOYZHApfJ1HyV-Yo">Forums</a>
+                    <a class="nav-link"
+                       href="https://testawai.000webhostapp.com/phpBB3/?fbclid=IwAR3qp_W7ryX-q-POH9-FNzKP0cjA62FXDoet-EcUn-1aOYZHApfJ1HyV-Yo">Forums</a>
                 </li>
             </ul>
+            <div class="pull-right">
+                <ul class="nav navbar-nav">
+                    {% if request.user.is_authenticated %}
+                        <li>
+                            <a class="nav-link" href="{% url 'core:profil' %}">Mon Profil</a>
+                        </li>
+                        <li>
+                            <p style="color: rgba(255,255,255,0.8);margin-top:0.5em;">
+                                Bonjour, {{ request.user.username }} | <a href="{% url 'accounts:logout' %}">Logout</a>
+                            </p>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a class="nav-link" href="{% url 'accounts:login' %}">Se connecter</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </nav>
     {% endblock %}
     {% block content %} Default content text {% endblock %}
@@ -69,4 +88,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 </body>
+<footer>
+    <h2>Temporary footer</h2>
+</footer>
 </html>
