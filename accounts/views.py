@@ -51,8 +51,9 @@ def login_view(request):
 
 
 def account_view(request):
-    # user = Account.objects.get(email=email)
     context = {}
+    user = request.user
+    context['user'] = user
     return render(request, 'accounts/profile.html', context)
 
 
@@ -73,3 +74,11 @@ def account_edit_view(request):
         )
     context['account_form'] = form
     return render(request, 'accounts/profile_edit.html', context)
+
+
+def must_authenticate(request):
+    return render(request, 'accounts/must_authenticate.html', )
+
+
+def must_admin(request):
+    return render(request, 'accounts/must_admin.html', )

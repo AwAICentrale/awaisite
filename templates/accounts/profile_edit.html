@@ -1,11 +1,39 @@
 {% extends "../base_generic.html" %}
 
 {% block content %}
-    <div>
-        <h2>Mon profil</h2>
+    <form class="form-signin" method="post">{% csrf_token %}
+
+        <h1 class="h3 mb-3 font-weight-normal">Mon profil</h1>
+
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adresse mail" required autofocus
+               value={{ account_form.initial.email }}>
+
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur" required
+               value="{{ account_form.initial.username }}">
+
         {% for field in account_form %}
-            <h3>{{ field.label_tag }}
-                {{ field }}</h3>
+            <p>
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </p>
         {% endfor %}
+        {% if account_form.non_field_errors %}
+            <div style="color: red">
+                <p>{{ account_form.non_field_errors }}</p>
+            </div>
+
+        {% endif %}
+
+        {% if success_message %}
+            <p style="color:green; text-align: center;">{{ success_message }}</p>
+        {% endif %}
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sauvegarder</button>
+
+    </form>
+
+    <div class="d-flex flex-column">
+        <a class="m-auto" href="{% url 'password_change' %}">Changer mot de passe</a>
     </div>
 {% endblock %}

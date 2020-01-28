@@ -8,8 +8,10 @@ urlpatterns = [
     path('register/', views.registration_view, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('profile/', views.account_edit_view, name='profile'),
+    path('profile/', views.account_view, name='profile'),
     path('profile/edit/', views.account_edit_view, name='profile_edit'),
+    path('must_authenticate/', views.must_authenticate, name='must_authenticate'),
+    path('must_admin/', views.must_admin, name='must_admin'),
 
     # # Password reset (ref:  https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     # path('password_change/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change.html'), name='password_change'),
