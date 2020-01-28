@@ -1,0 +1,94 @@
+
+body {
+    font: 1em "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+/* Logo header */
+h1#header {
+    height: 320px;
+    margin: 0;
+    background: url(../images/logo.png) no-repeat top;
+}
+
+/* navbar */
+.bg-custom {
+    background-color: #800000;
+}
+
+
+/* titres/paragraphes*/
+
+h2 {
+    text-align: left;
+    line-height: 40px;
+    font-size: 1.4em;
+    color: #800000;
+    border-bottom: 1px solid #800000;
+}
+
+h3 {
+    text-align: left;
+    line-height: 40px;
+    font-size: 1em;
+    color: #800000;
+    border-bottom: 1px solid #800000;
+}
+
+/* Miscellaneous */
+.left {
+    margin: 20 auto;
+    text-align: left;
+    border: 2px solid #800000;
+    background: #fff;
+}
+
+.right {
+    margin: 20 auto;
+    text-align: left;
+    border: 2px solid #800000;
+    background: #fff;
+}
+
+.btn {
+    margin: 20 auto;
+    background-color: #800000;
+}
+
+/* sign in forms */
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Blog posts */
