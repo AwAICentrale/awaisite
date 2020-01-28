@@ -26,17 +26,22 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
+
 # Application definition
 
 INSTALLED_APPS = [
+    # my apps
+    'web',
+    'accounts',
+    # django apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
-    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -117,4 +122,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
+# STATICFILE_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+#     os.path.join(BASE_DIR, 'media'),
+# ]
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')  # content delivery network
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
