@@ -1,19 +1,15 @@
 {% extends 'base_generic.html' %}
 {% load static %}
 {% block content %}
-<style>
-    body {
-        padding: 10px;
-        background-image: url("../../web/static/images/gui_plateau.png");
-        background-repeat: no-repeat;
-        background-size: 1300px 600px;
-        background-position: -10px 100px;
-    }
-</style>
-
-<head>
-    <title>Jeu</title>
-
+    <style>
+        body {
+            padding: 10px;
+            background-image: {% static 'images/gui_plateau.png' %};
+            background-repeat: no-repeat;
+            background-size: 1300px 600px;
+            background-position: -10px 100px;
+        }
+    </style>
     <style type="text/css">
         .case {
             width: 180px;
@@ -115,8 +111,8 @@
             float: left;
             text-align: center;
             padding-top: 20px;
-	    margin-left:75;
-	    margin-bottom:550;
+            margin-left: 75;
+            margin-bottom: 550;
 
         }
 
@@ -129,18 +125,30 @@
 
     <div class="plateau">
 
-        <div id="a1" class="case case1" quantite="0" set="0"><img id='p1' src="../../web/static/images/gui_graine4.png" width="160" height="160" ></div>
-        <div id="a2" class="case case2" quantite="0" set="1"><img id='p2' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a3" class="case case3" quantite="0" set="2"><img id='p3' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a4" class="case case4" quantite="0" set="3"><img id='p4' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a5" class="case case5" quantite="0" set="4"><img id='p5' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a6" class="case case6" quantite="0" set="5"><img id='p6' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a7" class="case case7" quantite="0" set="7"><img id='p7' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a8" class="case case8" quantite="0" set="8"><img id='p8' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a9" class="case case9" quantite="0" set="9"><img id='p9' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a10" class="case case10" quantite="0" set="10"><img id='p10' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a11" class="case case11" quantite="0" set="11"><img id='p11' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a12" class="case case12" quantite="0"set="12"><img id='p12' src="../../web/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a1" class="case case1" quantite="0" set="0"><img id='p1' src="{% static 'images/gui_graine4.png'%}" width="160" height="160">
+        </div>
+        <div id="a2" class="case case2" quantite="0" set="1"><img id='p2' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a3" class="case case3" quantite="0" set="2"><img id='p3' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a4" class="case case4" quantite="0" set="3"><img id='p4' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a5" class="case case5" quantite="0" set="4"><img id='p5' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a6" class="case case6" quantite="0" set="5"><img id='p6' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a7" class="case case7" quantite="0" set="7"><img id='p7' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a8" class="case case8" quantite="0" set="8"><img id='p8' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a9" class="case case9" quantite="0" set="9"><img id='p9' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                  height="160"></div>
+        <div id="a10" class="case case10" quantite="0" set="10"><img id='p10' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                     height="160"></div>
+        <div id="a11" class="case case11" quantite="0" set="11"><img id='p11' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                     height="160"></div>
+        <div id="a12" class="case case12" quantite="0" set="12"><img id='p12' src="{% static 'images/gui_graine4.png'%}" width="160"
+                                                                     height="160"></div>
 
         <div id="d1" class="set" case="0">4</div>
         <div id="d2" class="set" case="1">4</div>
@@ -156,20 +164,20 @@
         <div id="d12" class="set" case="11">4</div>
 
     </div>
-<script
-			type="text/javascript"
-			src="brython.js">
-		</script>
-		<script
-			type="text/javascript"
-			src="brython_stdlib.js">
-		</script>
-	</head>
-	<body onload="brython()">
+    <script
+            type="text/javascript"
+            src="brython.js">
+    </script>
+    <script
+            type="text/javascript"
+            src="brython_stdlib.js">
+    </script>
+    </head>
+    <body onload="brython()">
 
-	</body>
+    </body>
     <script type="text/javascript" src=''></script>
-<script type="text/python">
+    <script type="text/python">
 # -*- coding: utf-8 -*-
 """
 Created on Wed May 29 13:26:36 2019
@@ -384,6 +392,8 @@ a11 = data = document["a11"]
 a11.bind("click", montre11)
 a12 = data = document["a12"]
 a12.bind("click", montre12)
+
+
 
 
     </script>

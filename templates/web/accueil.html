@@ -1,5 +1,5 @@
 {% extends "../base_generic.html" %}
-
+{% load static %}
 {% block content %}
     {#    <div class="container-fluid">#}
     <!-- logo -->
@@ -33,73 +33,77 @@
     {#    </div>#}
     <style type="text/css">
 
-        @media (max-width: 768px) {
-            .right-column {
-                margin-left: 0px;
-            }
-        }
+	@media (max-width: 768px) {
+		.right-column{
+			margin-left: 0px;
+		}
+	}
 
-        @media (min-width: 768px) {
-            .right-column {
-                margin-left: 20px;
-            }
-        }
+	@media (min-width: 768px) {
+		.right-column{
+			margin-left: 20px;
+		}
+	}
 
-        .blog-post-container {
-            background-color: #fff;
-            margin-bottom: 20px;
-            width: 100%;
-        }
+	.blog-post-container{
+		margin-bottom: 20px;
+		width: 100%;
+	}
+	.create-post-bar{
+		background-color: #fff;
+		margin-bottom:20px;
+	}
 
-        .create-post-bar {
-            background-color: #fff;
-            margin-bottom: 20px;
-        }
+	.left-column{
+		padding:0px;
+	}
 
-        .left-column {
-            padding: 0px;
-        }
+	.right-column{
+		padding:0px;
+	}
+	.lead{
+		font-size: 17px;
+	}
+</style>
+<div class="container">
+	<div class="row">
 
-        .right-column {
-            padding: 0px;
-        }
+		<!-- article feed -->
+		<div class="left-column col-lg-7 offset-lg-1">
 
-    </style>
-    <div class="container">
-        <div class="row" style="margin-top: 5em;">
-            <!-- create article bar (admin only) -->
-            <div class="create-post-bar d-lg-none col-lg-7 offset-lg-1" style="border: solid 1px #000"> <!-- Bar appears if screen too small (bootstrap columns) -->
-                <a href="#">Créer article</a>
-            </div>
-            <!-- end create article bar -->
-            <!-- Article feed -->
-            <div class="left-column col-lg-7 offset-lg-1" style="border: solid 1px #000">
-                <div class="blog-post-container">
-                    <p>Random text</p>
-                </div>
-                <div class="blog-post-container">
-                    <p>Random text</p>
-                </div>
-                <div class="blog-post-container">
-                    <p>Random text</p>
-                </div>
-                <div class="blog-post-container">
-                    <p>Random text</p>
-                </div>
-            </div>
-            <!-- end article feed -->
+			<!-- Top 'create article' bar -->
+			<div class="d-lg-none mb-3">
+				<div class="card m-auto d-flex flex-column p-3">
+					<img class="img-fluid d-block m-auto pb-2" src="{% static 'images/logo.png' %}" width="140" height="80">
+					<p class="lead">Sample explication text</p>
+					<p class="m-auto"><a class="btn btn-primary" href="{% url 'web:create' %}">Créer article</a></p>
+				</div>
+			</div>
+			<!-- end Top 'create article' bar -->
 
-            <!-- create article column (admin only) -->
-            <div class="right-column col-lg-3 d-lg-flex d-none flex-column" style="border: solid 1px #000"> <!-- Hide this column if screen too small (bootstrap columns) -->
-                <div class="create-post-bar">
-                    <p>Random text</p>
-                    <p>Random text</p>
-                    <p>Random text</p>
-                    <p>Random text</p>
-                    <a href="#">Créer article</a>
-                </div>
-            </div>
-            <!-- end create article column -->
-        </div>
-    </div>
+			<!-- articles-->
+			{% for article in articles %}
+				<div class="blog-post-container">
+					{% include 'web/snippets/article_snippet.html' with articles=article %}
+				</div>
+			{% endfor %}
+			<!-- End articles-->
+		</div>
+		<!-- end article feed -->
+
+
+		<!-- Right 'create article' column  -->
+		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+
+			<div class="card create-post-bar d-flex flex-column p-3">
+				<img class="img-fluid d-block m-auto pb-2" src="{% static 'images/logo.png' %}" width="140" height="80">
+				<p class="lead">Sample explication text</p>
+				<p class="m-auto"><a class="btn btn-primary" href="{% url 'web:create' %}">Créer article</a></p>
+			</div>
+
+		</div>
+		<!-- end Right 'create article' column  -->
+
+	</div>
+</div>
 {% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 offset-lg-1">
+                <form class="create-form" method="post" enctype="multipart/form-data">{% csrf_token %} <!-- enctype compulsory for images -->
+
+                    <!-- title -->
+                    <div class="form-group">
+                        <label for="id_title">Titre</label>
+                        <input class="form-control" type="text" name="title" id="id_title" placeholder="Titre" required autofocus>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="form-group">
+                        <label for="id_body">Contenu</label>
+                        <textarea class="form-control" rows="10" type="text" name="body" id="id_body" placeholder="Ecrivez votre texte ici"
+                                  required></textarea>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="form-group">
+                        <label for="id_image">Image</label>
+                        <input type="file" name="image" id="id_image" accept="image/*">
+                    </div>
+
+                    <!-- Submit btn -->
+                    <button class="submit-button btn btn-lg btn-primary btn-block" type="submit">Créer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
