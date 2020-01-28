@@ -2,18 +2,22 @@
 
 {% block content %}
     <div>
-        <h2>Profil</h2>
-        <p><img src={% static "images/sans_photo.png" alt="sans_photo" width="100" height="100"/></p>
-        <p>&nbsp;</p>
-        <h3><strong>Nom&nbsp;&nbsp;<span style="color: #000000;">GANGNIMAZE</span></strong></h3>
-        <h3><strong>Prenom&nbsp;&nbsp;<span style="color: #000000;">Ngoufo</span></strong></h3>
-        <h3>E-mail&nbsp;&nbsp;<span style="color: #000000;">projetawai@hotmail.com</span></h3>
-        <h3>Mot de passe&nbsp;<span style="color: #0000ff;"><span style="color: #000000;
-        ">***************&nbsp;&nbsp;<a href="google.com" target="_blank" rel="noopener
-        "><span style="text-decoration: underline; color: #3366ff;">Changer</span></a></span></span></h3>
-        <h3>Classement&nbsp;&nbsp;<span style="color: #000000;">1er</span></h3>
-        <h3>Exp&eacute;rience&nbsp;&nbsp;<span style="color: #000000;">D&eacute;butant</span></h3>
-        <h3>Derni&egrave;re connexion&nbsp;&nbsp;<span
-                style="color: #000000;">18/10/2019&nbsp;&agrave;&nbsp;13h30</span></h3>
+        <h2>Mon profil</h2>
+        {#        <p><img src={% static "images/sans_photo.png" alt="sans_photo" width="100" height="100"/></p>#}
+        {#        <p>&nbsp;</p>#}
+        {#        <h3><strong>Nom&nbsp;&nbsp;<span style="color: #000000;">GANGNIMAZE</span></strong></h3>#}
+        {#        <h3><strong>Prenom&nbsp;&nbsp;<span style="color: #000000;">Ngoufo</span></strong></h3>#}
+        {#        <h3>E-mail&nbsp;&nbsp;<span style="color: #000000;">projetawai@hotmail.com</span></h3>#}
+        {#        <h3>Mot de passe&nbsp;<span style="color: #0000ff;"><span style="color: #000000;#}
+        {#        ">***************&nbsp;&nbsp;<a href="google.com" target="_blank" rel="noopener#}
+        {#        "><span style="text-decoration: underline; color: #3366ff;">Changer</span></a></span></span></h3>#}
+        {#        <h3>Classement&nbsp;&nbsp;<span style="color: #000000;">1er</span></h3>#}
+        {#        <h3>Exp&eacute;rience&nbsp;&nbsp;<span style="color: #000000;">D&eacute;butant</span></h3>#}
+        {#        <h3>Derni&egrave;re connexion&nbsp;&nbsp;<span#}
+        {#                style="color: #000000;">18/10/2019&nbsp;&agrave;&nbsp;13h30</span></h3>#}
+        {% for field in user %}
+            <h3>{{ field.label_tag }}
+                {{ field }}</h3>
+        {% endfor %}
     </div>
 {% endblock %}

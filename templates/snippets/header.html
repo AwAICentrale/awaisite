@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% block title %}<title>AwAI</title>{% endblock %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load static %}
-    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}"/>
-    <link rel="stylesheet" href="{% static  "css/style.css" %}"/>
-</head>
-<body>
-<div class="container-fluid">
-{#    {% include 'snippets/header.html' %} TODO #}
+<div>
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
 
@@ -74,9 +62,4 @@
             </ul>
         </div>
     </nav>
-    {% block content %} Default content text {% endblock %}
 </div>
-
-{% include 'snippets/footer.html' %}
-</body>
-</html>

@@ -2,21 +2,47 @@
 
 {% block content %}
 
-    <h2>Inscription</h2>
-    <form method="post">{% csrf_token %}
+    <style>
+        .form-signin input[type='email'] {
+            margin-bottom: 10px;
+        }
+
+        .form-signin input[type='text'] {
+            margin-bottom: 10px;
+        }
+
+        .form-signin input[type='password'] {
+            margin-bottom: -1px;
+        }
+
+        .h3 {
+            text-align: center;
+        }
+    </style>
+    <form class="form-signin" method="post">{% csrf_token %}
+        <h1 class="h3 mb-3 font-weight-normal">Créer un compte</h1>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adresse mail" required
+               autofocus>
+        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur"
+               required>
+        <input type="password" name="password1" id="inputPassword" class="form-control" placeholder="Mot de passe"
+               required>
+        <input type="password" name="password2" id="inputPassword" class="form-control" placeholder="Confirmer mot de passe"
+               required>
+
         {% for field in registration_form %}
             <p>
-                {{ field.label_tag }}
-                {{ field }}
-                {% if field.help_text %}
-                    <small style="color: grey;">{{ field.help_text }}</small>
-                {% endif %}
                 {% for error in field.errors %}
                     <p style="color:red;">{{ error }}</p>
                 {% endfor %}
             </p>
         {% endfor %}
-        <button type="submit">S'inscrire</button>
+        {% if refistration_form.non_field_errors %}
+            <div style="color:red;">
+                <p>{{ login_form.non_field_errors }}</p>
+            </div>
+        {% endif %}
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Créer un compte</button>
     </form>
 
 {% endblock %}
