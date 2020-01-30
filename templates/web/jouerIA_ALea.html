@@ -3,15 +3,16 @@
 <style>
     body {
         padding: 10px;
-        background-image: url("../../core/static/images/gui_plateau.png");
+        background-image: url("../../static/images/gui_plateau.png");
         background-repeat: no-repeat;
         background-size: 1300px 600px;
-        background-position: -10px 100px;
+        background-position: -10px 300px;
     }
 </style>
 
 <head>
     <title>Jeu</title>
+
 
     <style type="text/css">
         .case {
@@ -27,73 +28,73 @@
 
         .case1 {
             position: absolute;
-            top: 140;
+            top: 350;
             left: 60;
         }
 
         .case2 {
             position: absolute;
-            top: 140;
+            top: 350;
             left: 263;
         }
 
         .case3 {
             position: absolute;
-            top: 140;
+            top: 350;
             left: 466;
         }
 
         .case4 {
             position: absolute;
-            top: 140;
+            top: 350;
             left: 660;
         }
 
         .case5 {
             position: absolute;
-            top: 140;
+            top: 350;
             left: 850;
         }
 
         .case6 {
             position: absolute;
-            top: 155;
+            top: 365;
             left: 1035;
         }
 
         .case7 {
             position: absolute;
-            top: 430;
+            top: 640;
             left: 35;
         }
 
         .case8 {
             position: absolute;
-            top: 430;
+            top: 640;
             left: 232;
         }
 
         .case9 {
             position: absolute;
-            top: 430;
+            top: 640;
             left: 422;
         }
 
         .case10 {
             position: absolute;
-            top: 430;
+            top: 640;
             left: 629;
         }
 
         .case11 {
             position: absolute;
-            top: 430;
+            top: 640;
             left: 842;
         }
 
         .case12 {
             position: absolute;
-            top: 430;
+            top: 640;
             left: 1052;
         }
 
@@ -114,13 +115,36 @@
             float: left;
             text-align: center;
             padding-top: 20px;
-	    margin-left:75;
-	    margin-bottom:550;
+      	    margin-left:75;
+      	    margin-bottom:350;
+      	    margin-top:200;
+
+
+        }
+        .display {
+            border: 0;
+            line-height: 2.5;
+            font-size: 30;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            background-color: rgba(220, 0, 0, 1);
+            background-image: linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0));
+            box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+            width: 500;
+            height:470;
+            float: left;
+            text-align: center;
+            margin-top:200;
+            margin-left:120;
+	    vertical-align:middle;
+	    display:inline-block;
+
 
         }
 
         .plateau {
-            width: 1300px;
+            width: 1800px;
             height: 308px;
         }
     </style>
@@ -133,18 +157,19 @@
 
     <div class="plateau">
 
-        <div id="a1" class="case case1" quantite="0" set="0"><img id='p1' src="../../core/static/images/gui_graine4.png" width="160" height="160" ></div>
-        <div id="a2" class="case case2" quantite="0" set="1"><img id='p2' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a3" class="case case3" quantite="0" set="2"><img id='p3' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a4" class="case case4" quantite="0" set="3"><img id='p4' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a5" class="case case5" quantite="0" set="4"><img id='p5' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a6" class="case case6" quantite="0" set="5"><img id='p6' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a7" class="case case7" quantite="0" set="7"><img id='p7' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a8" class="case case8" quantite="0" set="8"><img id='p8' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a9" class="case case9" quantite="0" set="9"><img id='p9' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a10" class="case case10" quantite="0" set="10"><img id='p10' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a11" class="case case11" quantite="0" set="11"><img id='p11' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
-        <div id="a12" class="case case12" quantite="0"set="12"><img id='p12' src="../../core/static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a1" class="case case1" quantite="0" set="0"><img id='p1' src="../../static/images/gui_graine4.png" width="160" height="160" ></div>
+        <div id="a2" class="case case2" quantite="0" set="1"><img id='p2' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a3" class="case case3" quantite="0" set="2"><img id='p3' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a4" class="case case4" quantite="0" set="3"><img id='p4' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a5" class="case case5" quantite="0" set="4"><img id='p5' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a6" class="case case6" quantite="0" set="5"><img id='p6' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+
+        <div id="a7" class="case case7" quantite="0" set="7"><img id='p7' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a8" class="case case8" quantite="0" set="8"><img id='p8' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a9" class="case case9" quantite="0" set="9"><img id='p9' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a10" class="case case10" quantite="0" set="10"><img id='p10' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a11" class="case case11" quantite="0" set="11"><img id='p11' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
+        <div id="a12" class="case case12" quantite="0"set="12"><img id='p12' src="../../static/images/gui_graine4.png  " width="160" height="160"></div>
 
         <div id="d1" class="set" case="0">4</div>
         <div id="d2" class="set" case="1">4</div>
@@ -152,13 +177,22 @@
         <div id="d4" class="set" case="3">4</div>
         <div id="d5" class="set" case="4">4</div>
         <div id="d6" class="set" case="5">4</div>
+        <div id="dis1" class="display" case="asdas" ><font size="10" face="Verdana">Alea<br />
+	<span id="01"></span> <br />
+	<span id="02"></span> <br />
+	Human<br />	
+	</font></div>
+
         <div id="d7" class="set" case="6">4</div>
         <div id="d8" class="set" case="7">4</div>
         <div id="d9" class="set" case="8">4</div>
         <div id="d10" class="set" case="9">4</div>
         <div id="d11" class="set" case="10">4</div>
         <div id="d12" class="set" case="11">4</div>
-	<div id="choix" class="set" case="0">0</div>
+
+
+
+
 
     </div>
 <script type="text/javascript" src="brython.js"></script>
@@ -205,11 +239,6 @@ class Test:
 	self.game = Game()
 	self.game.set_players(self.algo0, self.algo1, self.data0, self.data1)
 
-
-
-
-
-
 class Game:
     def __init__(self, nb_seeds_end=0, GUI=False):
         self.b = Board()
@@ -252,19 +281,21 @@ class Game:
             if self.who_is_playing() == self.player0:
                 pit = self.who_is_playing().play(i)
                 rslt_move = self.play(pit)
+                print(rslt_move)
             else :
                 pit = self.who_is_playing().play()
                 rslt_move = self.play(pit)
-
+            if (self.nb_seeds_eaten > 48 - self.nb_seeds_end) \and max(self.player0.loft, self.player1.loft) > 24 \and (self.nb_seeds_eaten == 46 and self.end_game_is_blocked()):
+	        return self.end_of_game();
             if rslt_move == "END":
                 self.who_is_playing().add_to_loft(48 - self.nb_seeds_eaten)
                 return self.end_of_game()
             # the game stopped, the staying seeds arent touched
             elif rslt_move == "STOP":
                 return self.end_of_game()
-            elif rslt_move:
-                print(" ")
-            # print(self.b)
+            elif rslt_move :
+                return rslt_move
+
 
 
         return self.end_of_game()
@@ -305,16 +336,14 @@ class Game:
             # it means the move has to be played but it ends the game
             return "END"
         except NotInYourSideError as e:
-            print("e")
+            print(e)
             return False
         except EmptyPitError as e:
-            print("e")
+            print(e)
             return False
         except StarvationError as e:
-            print("e")
+            print(e)
             return False
-
-
     def play(self, pit):
         """function to use in order to play a move on the _board
         it takes one argument : number of the pit wanted to be played"""
@@ -430,23 +459,18 @@ class NotInYourSideError(Exception):
 
     def __str__(self):
         return self.message
-
-
 class EmptyPitError(Exception):
     def __init__(self):
         self.message = "You tried to play an empty pit"
 
     def __str__(self):
         return self.message
-
-
 class StarvationError(Exception):
     def __init__(self):
         self.message = "You mustn't starve your opponent"
 
     def __str__(self):
         return self.message
-
 class Player(ABC):
     """Player is an abstract class which fathers IA and Human"""
 
@@ -461,8 +485,6 @@ class Player(ABC):
     def add_to_loft(self, nb):
         self.game.nb_seeds_eaten += nb
         self.loft += nb
-
-
 class AI(Player):
     """docstring for player."""
 
@@ -476,8 +498,6 @@ class AI(Player):
 
     def play(self):
         return self.algo.play()
-
-
 class Human(Player):
     """The CLI version of the Human player class that asks the input to the player"""
     def __init__(self, game):
@@ -501,10 +521,6 @@ class Human(Player):
             except ValueError:
                 print("You have to enter a value between 0 and 5")
 
-
-
-
-
 class Alea:
     def __init__(self, game):
         self.game = game
@@ -520,195 +536,116 @@ class Alea:
             if result == "END":
                 return "END"
         return "END"
+
+v1=['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12',]
+v2=[11,10,9,8,7,6,0,1,2,3,4,5]
+v3=['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12',]
+
 t=Test("human","alea",10)
 t.run()
+def updateBoard():
+    for i in range(12) :
+	if t.game.b.board[v2[i]] <10: 	
+            document[v1[i]].src = "../../static/images/gui_graine"+str(t.game.b.board[v2[i]])+".png"
+            document[v3[i]].text=str(t.game.b.board[v2[i]])
+	else:
+    	    document[v1[i]].src = "../../static/images/gui_graine10.png"
+            document[v3[i]].text=str(t.game.b.board[v2[i]])
+    print("AQUI",t.game.b)
+    document["01"].text= str(t.game.player1.loft)
+    document["02"].text= str(t.game.player0.loft)
 
+def runIA():
+    rslt=t.game.run_game(0)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins"
+	else:
+	    document["dis1"].text= "Human wins" 
+    
+
+
+
+timeIA = 3000
 def montre1(ev):
-    t.game.run_game(0)
-    print("Après HUMAN :")
-    print(t.game.b)
-    t.game.run_game(0)
-    print("Après Alea :")
-    print(t.game.b)
-    document["p1"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[11])+".png"
-    document["d1"].text=str(t.game.b.board[11])
-    document["p2"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[10])+".png"
-    document["d2"].text=str(t.game.b.board[10])
-    document["p3"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[9])+".png"
-    document["d3"].text=str(t.game.b.board[9])
-    document["p4"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[8])+".png"
-    document["d4"].text=str(t.game.b.board[8])
-    document["p5"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[7])+".png"
-    document["d5"].text=str(t.game.b.board[7])
-    document["p6"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[6])+".png"
-    document["d6"].text=str(t.game.b.board[6])
-    document["p7"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[0])+".png"
-    document["d7"].text=str(t.game.b.board[0])
-    document["p8"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[1])+".png"
-    document["d8"].text=str(t.game.b.board[1])
-    document["p9"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[2])+".png"
-    document["d9"].text=str(t.game.b.board[2])
-    document["p10"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[3])+".png"
-    document["d10"].text=str(t.game.b.board[3])
-    document["p11"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[4])+".png"
-    document["d11"].text=str(t.game.b.board[4])
-    document["p12"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[5])+".png"
-    document["d12"].text=str(t.game.b.board[5])
+    rslt=t.game.run_game(0)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+	timer.set_timeout(runIA, timeIA)
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins" 
+	else:
+	    document["dis1"].text= "Human wins" 
+    
+    
+
 def montre2(ev):
-    t.game.run_game(1)
-    print("Après HUMAN :")
-    print(t.game.b)
-    t.game.run_game(0)
-    print("Après Alea :")
-    print(t.game.b)
-    document["p1"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[11])+".png"
-    document["d1"].text=str(t.game.b.board[11])
-    document["p2"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[10])+".png"
-    document["d2"].text=str(t.game.b.board[10])
-    document["p3"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[9])+".png"
-    document["d3"].text=str(t.game.b.board[9])
-    document["p4"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[8])+".png"
-    document["d4"].text=str(t.game.b.board[8])
-    document["p5"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[7])+".png"
-    document["d5"].text=str(t.game.b.board[7])
-    document["p6"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[6])+".png"
-    document["d6"].text=str(t.game.b.board[6])
-    document["p7"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[0])+".png"
-    document["d7"].text=str(t.game.b.board[0])
-    document["p8"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[1])+".png"
-    document["d8"].text=str(t.game.b.board[1])
-    document["p9"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[2])+".png"
-    document["d9"].text=str(t.game.b.board[2])
-    document["p10"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[3])+".png"
-    document["d10"].text=str(t.game.b.board[3])
-    document["p11"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[4])+".png"
-    document["d11"].text=str(t.game.b.board[4])
-    document["p12"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[5])+".png"
-    document["d12"].text=str(t.game.b.board[5])
+    rslt=t.game.run_game(1)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+	timer.set_timeout(runIA, timeIA)
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins" 
+	else:
+	    document["dis1"].text= "Alea Wins" 
+    
+    
+
 def montre3(ev):
-    t.game.run_game(2)
-    print("Après HUMAN :")
-    print(t.game.b)
-    t.game.run_game(0)
-    print("Après Alea :")
-    print(t.game.b)
-    document["p1"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[11])+".png"
-    document["d1"].text=str(t.game.b.board[11])
-    document["p2"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[10])+".png"
-    document["d2"].text=str(t.game.b.board[10])
-    document["p3"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[9])+".png"
-    document["d3"].text=str(t.game.b.board[9])
-    document["p4"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[8])+".png"
-    document["d4"].text=str(t.game.b.board[8])
-    document["p5"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[7])+".png"
-    document["d5"].text=str(t.game.b.board[7])
-    document["p6"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[6])+".png"
-    document["d6"].text=str(t.game.b.board[6])
-    document["p7"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[0])+".png"
-    document["d7"].text=str(t.game.b.board[0])
-    document["p8"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[1])+".png"
-    document["d8"].text=str(t.game.b.board[1])
-    document["p9"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[2])+".png"
-    document["d9"].text=str(t.game.b.board[2])
-    document["p10"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[3])+".png"
-    document["d10"].text=str(t.game.b.board[3])
-    document["p11"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[4])+".png"
-    document["d11"].text=str(t.game.b.board[4])
-    document["p12"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[5])+".png"
-    document["d12"].text=str(t.game.b.board[5])
+    rslt=t.game.run_game(2)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+	timer.set_timeout(runIA, timeIA)
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins" 
+	else:
+	    document["dis1"].text= "Alea Wins" 
+
 def montre4(ev):
-    t.game.run_game(3)
-    print("Après HUMAN :")
-    print(t.game.b)
-    t.game.run_game(0)
-    print("Après Alea :")
-    print(t.game.b)
-    document["p1"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[11])+".png"
-    document["d1"].text=str(t.game.b.board[11])
-    document["p2"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[10])+".png"
-    document["d2"].text=str(t.game.b.board[10])
-    document["p3"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[9])+".png"
-    document["d3"].text=str(t.game.b.board[9])
-    document["p4"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[8])+".png"
-    document["d4"].text=str(t.game.b.board[8])
-    document["p5"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[7])+".png"
-    document["d5"].text=str(t.game.b.board[7])
-    document["p6"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[6])+".png"
-    document["d6"].text=str(t.game.b.board[6])
-    document["p7"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[0])+".png"
-    document["d7"].text=str(t.game.b.board[0])
-    document["p8"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[1])+".png"
-    document["d8"].text=str(t.game.b.board[1])
-    document["p9"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[2])+".png"
-    document["d9"].text=str(t.game.b.board[2])
-    document["p10"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[3])+".png"
-    document["d10"].text=str(t.game.b.board[3])
-    document["p11"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[4])+".png"
-    document["d11"].text=str(t.game.b.board[4])
-    document["p12"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[5])+".png"
-    document["d12"].text=str(t.game.b.board[5])
+    rslt=t.game.run_game(3)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+	timer.set_timeout(runIA, timeIA)
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins" 
+	else:
+	    document["dis1"].text= "Alea Wins" 
+
 def montre5(ev):
-    t.game.run_game(4)
-    print("Après HUMAN :")
-    print(t.game.b)
-    t.game.run_game(0)
-    print("Après Alea :")
-    print(t.game.b)
-    document["p1"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[11])+".png"
-    document["d1"].text=str(t.game.b.board[11])
-    document["p2"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[10])+".png"
-    document["d2"].text=str(t.game.b.board[10])
-    document["p3"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[9])+".png"
-    document["d3"].text=str(t.game.b.board[9])
-    document["p4"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[8])+".png"
-    document["d4"].text=str(t.game.b.board[8])
-    document["p5"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[7])+".png"
-    document["d5"].text=str(t.game.b.board[7])
-    document["p6"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[6])+".png"
-    document["d6"].text=str(t.game.b.board[6])
-    document["p7"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[0])+".png"
-    document["d7"].text=str(t.game.b.board[0])
-    document["p8"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[1])+".png"
-    document["d8"].text=str(t.game.b.board[1])
-    document["p9"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[2])+".png"
-    document["d9"].text=str(t.game.b.board[2])
-    document["p10"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[3])+".png"
-    document["d10"].text=str(t.game.b.board[3])
-    document["p11"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[4])+".png"
-    document["d11"].text=str(t.game.b.board[4])
-    document["p12"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[5])+".png"
-    document["d12"].text=str(t.game.b.board[5])
+    rslt=t.game.run_game(4)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+	timer.set_timeout(runIA, timeIA)
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins" 
+	else:
+	    document["dis1"].text= "Alea Wins" 
+
+    
 def montre6(ev):
-    t.game.run_game(5)
-    print("Après HUMAN :")
-    print(t.game.b)
-    t.game.run_game(0)
-    print("Après Alea :")
-    print(t.game.b)
-    document["p1"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[11])+".png"
-    document["d1"].text=str(t.game.b.board[11])
-    document["p2"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[10])+".png"
-    document["d2"].text=str(t.game.b.board[10])
-    document["p3"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[9])+".png"
-    document["d3"].text=str(t.game.b.board[9])
-    document["p4"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[8])+".png"
-    document["d4"].text=str(t.game.b.board[8])
-    document["p5"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[7])+".png"
-    document["d5"].text=str(t.game.b.board[7])
-    document["p6"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[6])+".png"
-    document["d6"].text=str(t.game.b.board[6])
-    document["p7"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[0])+".png"
-    document["d7"].text=str(t.game.b.board[0])
-    document["p8"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[1])+".png"
-    document["d8"].text=str(t.game.b.board[1])
-    document["p9"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[2])+".png"
-    document["d9"].text=str(t.game.b.board[2])
-    document["p10"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[3])+".png"
-    document["d10"].text=str(t.game.b.board[3])
-    document["p11"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[4])+".png"
-    document["d11"].text=str(t.game.b.board[4])
-    document["p12"].src = "../../core/static/images/gui_graine"+str(t.game.b.board[5])+".png"
-    document["d12"].text=str(t.game.b.board[5])
+    rslt=t.game.run_game(5)
+    if rslt==True:
+    	print("AQUI",rslt)
+    	updateBoard()
+	timer.set_timeout(runIA, timeIA)
+    else:
+	if rslt==t.game.player1 :    	
+	    document["dis1"].text= "Alea Wins" 
+	else:
+	    document["dis1"].text= "Alea Wins" 
 
 
 a1 = data = document["a7"]
