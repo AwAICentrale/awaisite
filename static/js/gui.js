@@ -1,7 +1,9 @@
 
 var graine="<img src='../../core/static/images/gui_graine.png' border='0' height='30' width='30'>";
 
-
+function testFunction() {
+    window.alert("seperate js file test");
+}
 setEvents();
 var plateau = document.getElementByClassName("plateau");
 

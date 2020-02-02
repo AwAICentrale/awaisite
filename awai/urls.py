@@ -21,7 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('web.urls')),
+    path('web/', include('web.urls')),
     path('accounts/', include('accounts.urls')),
     # Password reset (ref:  https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     # Temporarily here before url fixes in accounts
