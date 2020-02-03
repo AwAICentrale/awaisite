@@ -112,10 +112,10 @@
   <div id="dis1" class="display" case="asdas" >IAs disponibles</br>
 <div class="btn-group">
 
-<a class="button" href="http://localhost:8000/jouerAlphaBeta/">AlphaBeta</a>
-  <a class="button" href="http://localhost:8000/jouerMinimax/">MiniMax</a>
+<a class="button" href="http://localhost:8000/jouerIA/">Alea</a>
+  <a class="button" href="http://localhost:8000/jouerAlphaBeta/">AlphaBeta</a>
 </div>
- </br>________________________________ <font size="5" face="Verdana"> Alea </br>
+ </br>________________________________ <font size="5" face="Verdana">MiniMax</br>
       <span id="01"></span></br>
 	X </br>
       <span id="02"></span> </br>
@@ -165,7 +165,7 @@
 </body>
 <script type="text/javascript" src=''></script>
 <script type="text/python">
-import time
+
 from abc import ABC, abstractmethod
 from browser import document,bind,timer,alert,html
 
@@ -265,7 +265,6 @@ class Game:
 
 
         return self.end_of_game()
-
 
     def allowed(self, pit, board=None, is_playing=None):
 
@@ -463,8 +462,10 @@ class AI(Player):
         super().__init__(game)
         self.algo = algo
 
-        if self.algo == "alea":
-            self.algo = Alea(self.game)
+        if self.algo == "minimax":
+            if data is None:
+                data = [1, -1]
+            self.algo = minimax(self.game, data)
 
 
     def play(self):
@@ -481,35 +482,151 @@ class Human(Player):
 	if result:
 	    return pit
 	else:
-	    print("This move is not allowed")
+	    print("ID This move is not allowed")
 	    return None
 
             
 
-class Alea:
-       def __init__(self, game):
-           self.game = game
+class Amelioration():
+    def __init__(self, nb_generation, size_population, nb_gains, stage=None, proba_mutation=0.01, proba_cross=0.3):
+        self.nb_generation = nb_generation
+        self.nb_gains = nb_gains
+        self.size_population = size_population
+        self.adn = ADN(size_population, nb_gains, proba_mutation, proba_cross)
+        self.stage = stage
 
-       def play(self):
-           list_move = [0, 1, 2, 3, 4, 5]
-           while list_move:
-               move_test = list_move.pop(randrange(0, len(list_move)))
-               result = self.game.allowed(move_test)
-               if result:  # it is a valid move
-                   #print(self.game.b)
-                   return move_test
-               if result == "END":
-                   return "END"
-           return "END"
+    def amelioration(self):
+        self.update_score()
+        for i in range(self.nb_generation):
+            self.adn.list_coeff_init.sort(key=lambda tup: tup[1], reverse=True)
+            self.adn.selection()
+            self.adn.cross()
+            self.adn.mutation()
+
+            self.update_score()
+        self.adn.list_coeff_init.sort(key=lambda tup: tup[1], reverse=True)
+        return self.adn.list_coeff_init
+
+    def update_score(self):
+        self.adn.list_coeff_init.sort(key=lambda tup: tup[1], reverse=True)
+        for (i, (list_coeff_gain, score)) in enumerate(self.adn.list_coeff_init[1:]):
+            game_test = TestAmelioration("alphabeta", "alphabeta", 1, self.stage, self.adn.list_coeff_init[0][0],
+                                         list_coeff_gain)
+            game_test.run()
+            # update score
+            self.adn.list_coeff_init[i][1] = game_test.game.player0.loft - game_test.game.player1.loft
+            # is it the best way to evaluate the score ? 27 - 12 equivalent to 25 - 10 ?
+
+
+class ADN:
+    def __init__(self, size_population, nb_gains, proba_mutation, proba_cross):
+        # create a set of initials solutions ; solutions used by minimax ab
+        self.list_coeff_init = []
+        self.size_population = size_population
+        self.nb_gains = nb_gains
+        self.proba_mutation = proba_mutation  # hig bound of genetic algorithm advice on wikipedia [0.001, 0.01]
+        self.proba_cross = proba_cross  # pick randomly :)
+
+        for i in range(size_population):
+            liste_coeff_gain = []
+            for j in range(nb_gains):
+                sign = random.choice([-1, 1])
+                liste_coeff_gain.append(sign * random.random())
+            self.list_coeff_init.append([liste_coeff_gain, -float('inf')])
+
+    def selection(self):  # select the solutions with the better scores and duplicate them
+        self.list_coeff_init.sort(key=lambda tup: tup[1], reverse=True)
+        n = self.size_population // 2
+        self.list_coeff_init = self.list_coeff_init[:self.size_population - n] + [
+            self.list_coeff_init[self.size_population - n + k] for k in range(n)]
+
+    def mutation(self):  # some coeff mutate
+        for k in range(self.size_population):
+            for i in range(self.nb_gains):
+                r = random.random()
+                if r < self.proba_mutation:
+                    sign = random.choice([-1, 1])
+                    self.list_coeff_init[k][0][i] = sign * random.random()
+
+    def cross(self):  # we choose 2 solutions, we replace them by crossing of themselves
+        self.list_coeff_init.sort(key=lambda tup: tup[1], reverse=True)
+        n = self.size_population // 2
+
+        def repartition(length):  # handles which gen comes from which genitor
+            a = []
+            b = []
+            for k in range(length):
+                rand = random.random()
+                if rand < 0.5:
+                    a.append(k)
+                else:
+                    b.append(k)
+            return a, b
+
+        for i, (papa, mama) in enumerate(zip(self.list_coeff_init[:n], self.list_coeff_init[n:])):
+            r = random.random()
+            if r < self.proba_cross:
+                son1 = [0] * self.nb_gains
+                son2 = [0] * self.nb_gains
+
+                a, b = repartition(self.nb_gains)
+
+                for ind in a:
+                    son1[ind] = papa[0][ind]
+                    son2[ind] = mama[0][ind]
+
+                for ind in b:
+                    son1[ind] = mama[0][ind]
+                    son2[ind] = papa[0][ind]
+
+                self.list_coeff_init[i] = [son1, -float('inf')]
+                self.list_coeff_init[i + n] = [son2, -float('inf')]
+class minimax:
+    def __init__(self, game, list_coeff_gain):
+        self.game = game
+        self.list_coeff_gain = list_coeff_gain
+
+    def play(self):
+        best_move = "END"
+        h_gain = float("-inf")
+        for move_a in range(6):  # we try every move possible
+            gain_move_a = float("inf")
+            if self.game.allowed(move_a):
+                b1 = deepcopy(self.game.b)
+                seeds_eaten_a = self.game.move(move_a, board=b1, is_playing=self.game.is_playing)
+                for move_b in range(6):
+                    gain_move_a_b = float("inf")
+                    if self.game.allowed(move_b, board=b1, is_playing=1 - self.game.is_playing):
+                        # move_a and move_b are licit
+                        seeds_eaten_b = self.game.move(move_a, board=b1, is_playing=1 - self.game.is_playing)
+                        gain_move_a_b = self.gain(b1, self.game.is_playing, seeds_eaten_a, seeds_eaten_b)
+                    if gain_move_a_b < gain_move_a:
+                        gain_move_a = gain_move_a_b
+            if gain_move_a != float("inf"):
+                if gain_move_a > h_gain:
+                    h_gain = gain_move_a
+                    best_move = move_a
+        return best_move
+
+    def gain(self, board, player, seeds_eaten_a, seeds_eaten_b):
+        """_this function takes the board we want to evaluate and the
+        player for whom we want to evaluate the move."""
+        g = self.list_coeff_gain[0] * self.gain_a(seeds_eaten_a) + \
+            self.list_coeff_gain[1] * self.gain_a(seeds_eaten_b)
+        return g
+
+    def gain_a(self, seeds_eaten_a):
+        return seeds_eaten_a
+
+    def gain_b(self, seeds_eaten_b):
+        return -seeds_eaten_b
 
 v1=['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12',]
 v2=[11,10,9,8,7,6,0,1,2,3,4,5]
 v3=['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12',]
 
-t=Test("human","alea",10)
+t=Test("human","minimax",10)
 t.run()
-
-
 def updateBoard():
     for i in range(12) :
 	  
@@ -534,9 +651,9 @@ def runIA():
     else:
         newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= "Alea  Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 
 def newdiv_end():
 	test=document["plateau1"]
@@ -568,9 +685,9 @@ def montre1(ev):
     else:
 	newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= "Alea  Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 
 
 
@@ -585,9 +702,9 @@ def montre2(ev):
     else:
 	newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= "Alea  Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 
 
 def montre3(ev):
@@ -601,9 +718,9 @@ def montre3(ev):
     else:
 	newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= "Alea  Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+"Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 
 def montre4(ev):
     rslt=t.game.run_game(3)
@@ -616,9 +733,9 @@ def montre4(ev):
     else:
 	newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= "Alea  Wins !   "+" Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+" Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 def montre5(ev):
     rslt=t.game.run_game(4)
     print("ID  dentro", rslt)
@@ -630,9 +747,9 @@ def montre5(ev):
     else:
 	newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= " Alea  Wins !   "+" Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+" Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 
 
 def montre6(ev):
@@ -645,9 +762,9 @@ def montre6(ev):
     else:
 	newdiv_end()
 	if rslt==t.game.player1 :
-	    document["new-div"].text= " Alea  Wins !   "+" Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Minimax Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 	else:
-	    document["new-div"].text= "Human Wins !   "+" Alea : "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	    document["new-div"].text= "Human Wins !   "+"Minimax: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
 
 
 a1 = data = document["a7"]

@@ -29,9 +29,16 @@ def strategie(request):
 
 def jouerIA(request):
     # question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'web/jouerIA.html', )
-
-
+    return render(request, 'web/jouerIA_ALea.html', )
+def jouerIA_ALea(request):
+    # question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'web/jouerIA_ALea.html', )
+def jouerIA_MiniMax(request):
+    # question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'web/jouerIA_MiniMax.html', )
+def jouerIA_AlphaBeta(request):
+    # question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'web/jouerIA_AlphaBeta.html', )
 def create_article_view(request):
     context = {}
     user = request.user
