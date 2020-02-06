@@ -18,18 +18,42 @@
         .h3 {
             text-align: center;
         }
+
+        .form-signin label {
+            color: grey;
+            margin-right: 20px;
+        }
     </style>
-    <form class="form-signin" method="post">{% csrf_token %}
-        <h1 class="h3 mb-3 font-weight-normal">Créer un compte</h1>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Adresse mail" required
-               autofocus>
-        <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur"
-               required>
+    <form class="form-signin" style="border: solid 1px black;" method="post">{% csrf_token %}
+        <div class="form-group row">
+            <h1 class="h3 mb-3 font-weight-normal">Créer un compte</h1>
+        </div>
+        <div class="form-group row">
+            <label for="inputEmail" class="col-2 col-form-label">Adresse mail</label>
+            <div class="col-10">
+                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="" required
+                       autofocus>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="inputUsername" class="col-sm-2 col-form-label">Nom d'utilisateur</label>
+            <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Nom d'utilisateur"
+                   required>
+        </div>
         <input type="password" name="password1" id="inputPassword" class="form-control" placeholder="Mot de passe"
                required>
         <input type="password" name="password2" id="inputPassword" class="form-control" placeholder="Confirmer mot de passe"
                required>
-
+        <div class="form-group">
+            <label for="skillLevel" class="col-sm-2 col-form-label">Niveau</label>
+            <select class="form-control" id="skillLevel">
+                <option value="1">Nouveau à l'awalé</option>
+                <option value="2">Débutant</option>
+                <option value="3">Intermédiaire</option>
+                <option value="4">Avancé</option>
+                <option value="5">Expert</option>
+            </select>
+        </div>
         {% for field in registration_form %}
             <p>
                 {% for error in field.errors %}
