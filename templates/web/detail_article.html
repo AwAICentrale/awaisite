@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <style>
+        .card {
+            max-width: 700px;
+        }
+    .container {
+        padding: 20px;
+    }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="card m-auto">
+                <img class="card-img-top" src="{{ article.image.url }}">
+                <div class="card-body my-2">
+                    <h2 class="card-title">{{ article.title }}</h2>
+                    <p class="card-text">{{ article.body|safe }}</p>
+                    {% if article.author == request.user %}
+                        <a href="{% url 'web:edit_article' article.slug %}" class="btn btn-primary">Mettre à jour</a>
+                    {% endif %}
+                </div>
+                <div class="card-footer text-muted">Mis à jour le {{ article.date_updated }} par {{ article.author }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

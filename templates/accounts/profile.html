@@ -1,26 +1,37 @@
 {% extends "../base_generic.html" %}
 
 {% block content %}
+    <style>
+        .article {
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+        }
+    </style>
     <div>
         <h2>Mon profil</h2>
-        {#        <p><img src={% static "images/sans_photo.png" alt="sans_photo" width="100" height="100"/></p>#}
-        {#        <p>&nbsp;</p>#}
-        {#        <h3><strong>Nom&nbsp;&nbsp;<span style="color: #000000;">GANGNIMAZE</span></strong></h3>#}
-        {#        <h3><strong>Prenom&nbsp;&nbsp;<span style="color: #000000;">Ngoufo</span></strong></h3>#}
-        {#        <h3>E-mail&nbsp;&nbsp;<span style="color: #000000;">projetawai@hotmail.com</span></h3>#}
-        {#        <h3>Mot de passe&nbsp;<span style="color: #0000ff;"><span style="color: #000000;#}
-        {#        ">***************&nbsp;&nbsp;<a href="google.com" target="_blank" rel="noopener#}
-        {#        "><span style="text-decoration: underline; color: #3366ff;">Changer</span></a></span></span></h3>#}
-        {#        <h3>Classement&nbsp;&nbsp;<span style="color: #000000;">1er</span></h3>#}
-        {#        <h3>Exp&eacute;rience&nbsp;&nbsp;<span style="color: #000000;">D&eacute;butant</span></h3>#}
-        {#        <h3>Derni&egrave;re connexion&nbsp;&nbsp;<span#}
-        {#                style="color: #000000;">18/10/2019&nbsp;&agrave;&nbsp;13h30</span></h3>#}
-{#        <h3>{{ user.image }}</h3>#}
+        {#      <h5>{{ user.image }}</h5>#}
         <h5>{{ user.email }}</h5>
         <h5>{{ user.username }}</h5>
         <h5>{{ user.last_login }}</h5>
+        <h5>{{ context }}</h5>
     </div>
     <div>
-        <a href="{% url 'accounts:profile_edit'%}">Modifier</a>
+        <a href="{% url 'accounts:profile_edit' %}">Modifier</a>
+    </div>
+
+    <div class="container mt-4 p-4">
+        <div class="row">
+            <div class="article">
+                <h3 class="mb-3 font-weight-normal">Articles :</h3>
+                <ul>
+                    {% for article in articles %}
+                        <a href="{% url 'web:detail_article' article.slug %}" style="text-decoration: none;">
+                            <li class="list-group-item">{{ article }}</li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 {% endblock %}

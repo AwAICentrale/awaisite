@@ -59,13 +59,3 @@ class Account(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
-
-# class Account(models.Model):
-#     prenom = models.CharField(max_length=50)
-#     nom = models.CharField(max_length=50)
-#     sexe = models.CharField(max_length=10)
-#     date_naissance = models.DateField()
-#     pseudo = models.CharField(max_length=50)
-#     mail = models.EmailField()
-#     nl = models.BooleanField()
-#     statut = models.CharField(max_length=5)
