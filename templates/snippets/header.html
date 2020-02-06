@@ -1,65 +1,71 @@
-<div>
-    <!--Navbar-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+<style>
+    .search-bar {
+        max-width: 500px;
+        width: 100%;
+    }
 
-        {#            <!-- Navbar brand -->#}
-        {#            <a class="navbar-brand" href="#">Menu</a>#}
+    .search-bar input {
+        color: rgba(255, 255, 255, 0.8);
+    }
+</style>
 
-        {#            <!-- Collapse button --> FOR MOBILE#}
-        {#            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"#}
-        {#                    aria-controls="basicExampleNav"#}
-        {#                    aria-expanded="false" aria-label="Toggle navigation">#}
-        {#                <span class="navbar-toggler-icon"></span>#}
-        {#            </button>#}
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'web:home' %}">home<span
-                        class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'web:regles_jeu' %}">Règles</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'web:strategie' %}">Stratégie</a>
-            </li>
-            <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Jouer
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'web:jouerIA' %}">Contre l'IA</a>
-                    <a class="dropdown-item" href="#">Contre un autre joueur</a>
-                </div>
-            </li>
-            {#                <li class="nav-item">#}
-            {#                    <a class="nav-link" href="{% url 'core:profil' %}">Mon profil</a>#}
-            {#                </li>#}
-            <li class="nav-item">
-                <a class="nav-link"
-                   href="https://testawai.000webhostapp.com/phpBB3/?fbclid=IwAR3qp_W7ryX-q-POH9-FNzKP0cjA62FXDoet-EcUn-1aOYZHApfJ1HyV-Yo">Forums</a>
-            </li>
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom mb-3">
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'web:home' %}">Accueil<span
+                    class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'web:game_rules' %}">Règles</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'web:strategies' %}">Stratégie</a>
+        </li>
+        <!-- Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Jouer
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{% url 'web:play_ai' %}">Contre l'IA</a>
+                <a class="dropdown-item" href="#">Contre un autre joueur</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               href="https://testawai.000webhostapp.com/phpBB3/?fbclid=IwAR3qp_W7ryX-q-POH9-FNzKP0cjA62FXDoet-EcUn-1aOYZHApfJ1HyV-Yo">Forums</a>
+        </li>
+    </ul>
+    <!-- Search bar -->
+    <div class="search-bar mt-sm-2 mr-2">
+        <form method="get">
+            <input type="text" class="form-control" name="q" id="id_q" placeholder="Rechercher...">
+        </form>
+    </div>
+    <!-- END Search bar -->
+    <div class="pull-right">
+        <ul class="nav navbar-nav">
+            {% if request.user.is_authenticated %}
+                <li>
+                    <a class="nav-link" href="{% url 'accounts:profile' %}">Mon Profil</a>
+                </li>
+                <li>
+                    <p style="color: rgba(255,255,255,0.8);margin-top:0.5em;">
+                        Bonjour, {{ request.user.username }} | <a href="{% url 'accounts:logout' %}">Déconnexion</a>
+                    </p>
+                </li>
+            {% else %}
+                <li>
+                    <a class="nav-link" href="{% url 'accounts:login' %}">Se connecter</a>
+                </li>
+            {% endif %}
         </ul>
-        <div class="pull-right">
-            <ul class="nav navbar-nav">
-                {% if request.user.is_authenticated %}
-                    <li>
-                        <a class="nav-link" href="{% url 'accounts:profile' %}">Mon Profil</a>
-                    </li>
-                    <li>
-                        <p style="color: rgba(255,255,255,0.8);margin-top:0.5em;">
-                            Bonjour, {{ request.user.username }} | <a href="{% url 'accounts:logout' %}">Logout</a>
-                        </p>
-                    </li>
-                {% else %}
-                    <li>
-                        <a class="nav-link" href="{% url 'accounts:login' %}">Se connecter</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-    </nav>
-</div>
+    </div>
+</nav>
+
+<script type="text/javascript">
+    document.getElementById("id_q").value = "{{ query }}"  // putting query directly in value in html tag does not work ?? }}
+</script>

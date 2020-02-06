@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q  # for search bar
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from accounts.models import Account
@@ -9,7 +10,12 @@ from operator import attrgetter
 
 def home_view(request):
     context = {}
-    articles = sorted(Article.objects.all(), key=attrgetter('date_updated'), reverse=True)  # sort articles by latest updated
+    query = ""
+    if request.GET:
+        query = request.GET['q']
+        context['query'] = str(query)
+
+    articles = sorted(get_article_queryset(query), key=attrgetter('date_updated'), reverse=True)  # sort articles by latest updated
     context['articles'] = articles
     return render(request, 'web/home.html', context)
 
@@ -81,3 +87,23 @@ def edit_article_view(request, slug):
     )
     context['form'] = form
     return render(request, 'web/edit_article.html', context)
+
+
+def get_article_queryset(query=None):
+    queryset = []
+    queries = query.split(" ")  # for example : awai game strategy = [awai, game, strategy]
+    for q in queries:
+        articles = Article.objects.filter(
+            Q(title__icontains=q) |
+            Q(body__icontains=q)
+        ).distinct()
+
+        for article in articles:
+            queryset.append(article)
+
+    return list(set(queryset))  # make sure list is unique
+
+
+def ajax_test_view(request):
+    context = {}
+    return render(request, 'web/ajax_test.html', context)

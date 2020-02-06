@@ -1,12 +1,33 @@
-
-body {
+html, body {
     font: 1em "Segoe UI", Helvetica, Arial, sans-serif;
     background-color: #f2f2f2;
+    height: 100%;
+}
 
+#main-wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+header, footer {
+    flex: 1 100%;
+    flex-shrink: 0;
+}
+
+main {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex-grow: 1;  /* to put footer at bottom */
 }
 
 /* Logo header */
-h1#header {
+h1 #header {
     height: 320px;
     margin: 0;
     background: url(../images/logo.png) no-repeat top;

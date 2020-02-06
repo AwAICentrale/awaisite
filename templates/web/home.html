@@ -3,77 +3,85 @@
 {% block content %}
     <style type="text/css">
 
-	@media (max-width: 768px) {
-		.right-column{
-			margin-left: 0px;
-		}
-	}
+        @media (max-width: 768px) {
+            .right-column {
+                margin-left: 0px;
+            }
+        }
 
-	@media (min-width: 768px) {
-		.right-column{
-			margin-left: 20px;
-		}
-	}
+        @media (min-width: 768px) {
+            .right-column {
+                margin-left: 20px;
+            }
+        }
 
-	.blog-post-container{
-		margin-bottom: 20px;
-		width: 100%;
-	}
-	.create-post-bar{
-		background-color: #fff;
-		margin-bottom:20px;
-	}
+        .blog-post-container {
+            margin-bottom: 20px;
+            width: 100%;
+        }
 
-	.left-column{
-		padding:0px;
-	}
+        .create-post-bar {
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
 
-	.right-column{
-		padding:0px;
-	}
-	.lead{
-		font-size: 17px;
-	}
-</style>
-<div class="container">
-	<div class="row">
+        .left-column {
+            padding: 0px;
+        }
 
-		<!-- article feed -->
-		<div class="left-column col-lg-7 offset-lg-1">
+        .right-column {
+            padding: 0px;
+        }
 
-			<!-- Top 'create article' bar -->
-			<div class="d-lg-none mb-3">
-				<div class="card m-auto d-flex flex-column p-3">
-					<img class="img-fluid d-block m-auto pb-2" src="{% static 'images/logo.png' %}" width="140" height="80">
-					<p class="lead">Sample explication text</p>
-					<p class="m-auto"><a class="btn btn-primary" href="{% url 'web:create' %}">Créer article</a></p>
-				</div>
-			</div>
-			<!-- end Top 'create article' bar -->
+        .lead {
+            font-size: 17px;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
 
-			<!-- articles-->
-			{% for article in articles %}
-				<div class="blog-post-container">
-					{% include 'web/snippets/article_snippet.html' with article=article %}
-				</div>
-			{% endfor %}
-			<!-- End articles-->
-		</div>
-		<!-- end article feed -->
+            <!-- article feed -->
+            <div class="left-column col-lg-7 offset-lg-1">
+
+                <!-- Top 'create article' bar -->
+                <div class="d-lg-none mb-3">
+                    <div class="card m-auto d-flex flex-column p-3">
+                        <img class="img-fluid d-block m-auto pb-2" src="{% static 'images/logo.png' %}" width="140" height="80">
+                        <p class="lead">Sample explication text</p>
+                        <p class="m-auto"><a class="btn btn-primary" href="{% url 'web:create' %}">Créer article</a></p>
+                    </div>
+                </div>
+                <!-- end Top 'create article' bar -->
+
+                <!-- articles-->
+                {% if articles %}
+                    {% for article in articles %}
+                        <div class="blog-post-container">
+                            {% include 'web/snippets/article_snippet.html' with article=article %}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="blog-post-container">
+                        {% include 'web/snippets/article_snippet.html' with query=query %}
+                    </div>
+                {% endif %}
+                <!-- End articles-->
+            </div>
+            <!-- end article feed -->
 
 
-		<!-- Right 'create article' column  -->
-		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+            <!-- Right 'create article' column  -->
+            <div class="right-column col-lg-3 d-lg-flex d-none flex-column">
 
-			<div class="card create-post-bar d-flex flex-column p-3">
-				<img class="img-fluid d-block m-auto pb-2" src="{% static 'images/logo.png' %}" width="140" height="80">
-				<p class="lead">Sample explication text</p>
-				<p class="m-auto"><a class="btn btn-primary" href="{% url 'web:create' %}">Créer article</a></p>
-			</div>
+                <div class="card create-post-bar d-flex flex-column p-3">
+                    <img class="img-fluid d-block m-auto pb-2" src="{% static 'images/logo.png' %}" width="140" height="80">
+                    <p class="lead">Sample explication text</p>
+                    <p class="m-auto"><a class="btn btn-primary" href="{% url 'web:create' %}">Créer article</a></p>
+                </div>
 
-		</div>
-		<!-- end Right 'create article' column  -->
+            </div>
+            <!-- end Right 'create article' column  -->
 
-	</div>
-</div>
+        </div>
+    </div>
 {% endblock %}
