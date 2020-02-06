@@ -1,33 +1,24 @@
-<style>
-    .card {
-        max-width: 700px;
-    }
-    .card-body{
-        padding: 20px;
-    }
-</style>
-
 <div class="container">
-    <div class="row">
+	<div class="row">
 
-        <!-- Blog Post -->
-        <div class="card m-auto">
-            <a href="{% url 'web:detail_article' article.slug %}">
-                <img class="card-img-top" src="{{ article.image.url }}">
-            </a>
+		<!-- Blog Post -->
+		<div class="card m-auto">
+			<a href="#"> {# {% url 'web:detail' post.slug %} #}
+				<img class="card-img-top" src="{{article.image.url}}">
+			</a>
 
-            <div class="card-body mt-2 mb-2">
-                <a href="#">
-                    <h2 class="card-title">{{ article.title }}</h2>
-                </a>
-                <p class="card-text">{{ article.body|safe|truncatechars:250 }}</p>
-                {% if article.author == request.user %}
-                    <a href="{% url 'web:edit_article' article.slug %}" class="btn btn-primary">Mettre à jour</a>
-                {% endif %}
-            </div>
-            <div class="card-footer text-muted">
-                Mis à jour le {{ article.date_updated }} par {{ article.author }}
-            </div>
-        </div>
-    </div>
+			<div class="card-body mt-2 mb-2">
+				<a href="#">
+					<h2 class="card-title">{{article.title}}</h2>
+				</a>
+				<p class="card-text">{{article.body|safe}}</p> {# |truncatechars:180 if adding article detail later #}
+{#				{% if article.author == request.user %}#}
+{#					<a href="{% url 'web:edit' article.slug %}" class="btn btn-primary">Mettre à jour</a>#}
+{#				{% endif %}#}
+			</div>
+			<div class="card-footer text-muted">
+			  Mis à jour {{article.date_updated}} par {{article.author}}
+			</div>
+		</div>
+	</div>
 </div>

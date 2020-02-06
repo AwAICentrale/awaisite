@@ -1,0 +1,814 @@
+{% extends "../base_generic.html" %}
+{% load static %}
+{% block content %}
+<style>
+   body {
+   padding: 10px;
+   background-image: url("../../static/images/gui_plateau.png");
+   background-repeat: no-repeat;
+   background-size: 900px 400px;
+   background-position: -10px 190px;
+   }
+</style>
+<head>
+   <title>Jeu</title>
+   <style type="text/css">
+      .case {
+      width: 137px;
+      height: 137px;
+      padding-top: 20px;
+      border: 2px ;
+      border-radius: 50%;
+      -moz-border-radius: 50%;
+      -webkit-border-radius: 50%;
+      text-align: center;
+      float: left;
+      }
+      .set {
+      border: 0;
+      line-height: 2.5;
+      padding: 0 20px;
+      font-size: 30;
+      text-align: center;
+      color: #fff;
+      text-shadow: 1px 1px 1px #000;
+      border-radius: 10px;
+      background-color: #800000;
+      background-image: linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0));
+      box-shadow: inset 2px 2px 3px rgba(255, 255, 255, 0.8), inset -2px -2px 3px rgba(0, 0, 0, .6);
+      width: 80;
+      height: 80px;
+      float: left;
+      text-align: center;
+      padding-top: 20px;
+      margin-left:60px;
+      margin-right:24px;
+      margin-bottom:35px;
+      margin-top:20px;
+      
+      }
+      .display {
+      border: 1px solid ;
+      line-height: 2.5;
+      font-size: 30;
+      color: #fff;
+      text-shadow: 1px 1px 1px #000;
+      border-radius: 10px;
+      background-color: #800000;
+      background-image: linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0));
+      box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6);
+      width: 300px;
+      height:500px;
+      float: right;
+      text-align: center;
+
+      }
+      .display0 {
+      border: 2px ;
+      width: 1200px;
+      height: 2px;
+      }
+      .display1 {
+      width: 1000px;
+      height: 110px;
+      }
+      .display2 {
+      width: 900px;
+      height: 308px;
+      }
+      .plateau1 {
+      width: 900px;
+      height: 200px;
+      }
+      .plateau2 {
+      width: 900px;
+      height: 175px;
+      }
+      .btn-group .button {
+  background-color: #FFFFFF;
+ border: 1px solid;
+  color: #800000;
+  padding: 15px 32px;
+  text-align: center;
+
+  display: inline-block;
+  font-size: 16px;
+ 
+  float: left;
+}
+
+.btn-group .button:not(:last-child) {
+ /* Prevent double borders */
+}
+
+.btn-group .button:hover {
+
+}
+   </style>
+</head>
+
+<body>
+<div class="display0">   
+  <div id="dis1" class="display" case="asdas" >IAs disponibles</br>
+<div class="btn-group">
+
+<a class="button" href="http://localhost:8000/jouerIA/">Alea</a>
+  <a class="button" href="http://localhost:8000/jouerMiniMax/">MiniMax</a>
+</div>
+ </br>________________________________ <font size="5" face="Verdana">AlphaBeta</br>
+      <span id="01"></span></br>
+	X </br>
+      <span id="02"></span> </br>
+      Human</br>
+      </font>
+   </div>   </div>
+   <div class="display1">
+      <div id="d1" class="set" case="0">4</div>
+      <div id="d2" class="set" case="1">4</div>
+      <div id="d3" class="set" case="2">4</div>
+      <div id="d4" class="set" case="3">4</div>
+      <div id="d5" class="set" case="4">4</div>
+      <div id="d6" class="set" case="5">4</div>
+
+   </div>
+   <div id="plateau1" class="plateau1">
+      <div id="a1" class="case" ><img id='p1' src="{% static "images/gui_graine4.png" %}" width="120" height="120" ></div>
+      <div id="a2" class="case" ><img id='p2' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a3" class="case" ><img id='p3' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a4" class="case" ><img id='p4' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a5" class="case" ><img id='p5' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a6" class="case" ><img id='p6' src="{% static "images/gui_graine4.png" %}"width="120" height="120"></div>
+   </div>
+  <div id="0R"></div>
+   <div class="plateau2">
+      <div id="a7" class="case"  ><img id='p7' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a8" class="case " ><img id='p8' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a9" class="case " ><img id='p9' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a10" class="case" ><img id='p10' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a11" class="case" ><img id='p11' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+      <div id="a12" class="case" ><img id='p12' src="{% static "images/gui_graine4.png" %}" width="120" height="120"></div>
+   </div>
+
+ 
+   <div id="d7" class="set" case="6">4</div>
+   <div id="d8" class="set" case="7">4</div>
+   <div id="d9" class="set" case="8">4</div>
+   <div id="d10" class="set" case="9">4</div>
+   <div id="d11" class="set" case="10">4</div>
+   <div id="d12" class="set" case="11">4</div>
+
+   <script type="text/javascript" src="{% static "js/brython.js"%}"></script>
+   <script type="text/javascript" src="{% static "js/brython_stdlib.js"%}">
+   </script>
+   </head>
+   <body onload=" brython()">
+</body>
+<script type="text/javascript" src=''></script>
+<script type="text/python">
+import time
+from abc import ABC, abstractmethod
+from browser import document,bind,timer,alert,html
+
+
+from copy import deepcopy
+from random import randrange
+
+
+
+
+class Test:
+    """This class is meant to be the class that provides the tests between the IAs
+    You shall provide the name of the two algorithms you want to get stats on"""
+
+    def __init__(self, algo0, algo1, nb_games, data0=None, data1=None):
+        self.nb_games = nb_games
+        self.stat = [0, 0, 0]
+        self.algo0 = algo0
+        self.algo1 = algo1
+        self.data0 = data0
+        self.data1 = data1
+
+    def run(self):
+
+        #for _ in range(self.nb_games):
+	self.game = Game()
+	self.game.set_players(self.algo0, self.algo1, self.data0, self.data1)
+
+class Game:
+    def __init__(self, nb_seeds_end=0, GUI=False):
+        self.b = Board()
+        # _below this number of seeds the game stops
+        self.nb_seeds_end = nb_seeds_end
+        self.algos_available = ["alea", "alphabeta", "minimax", "aleaalphabeta", "alphabetabegin", "alphabetamidgame",
+                                "mcts"]
+        self.is_playing = 0
+        self.nb_seeds_eaten = 0
+        self.GUI = GUI
+
+    def set_players(self, player0, player1, data0=None, data1=None):
+        """you have to call this function to create the type of the players
+        before the game starts"""
+        if player0 in self.algos_available:
+            self.player0 = AI(player0, self, data=data0)
+        else:
+            if self.GUI:
+                self.player0 = HumanGUI(self)
+            else:
+                self.player0 = Human(self)
+
+        if player1 in self.algos_available:
+            self.player1 = AI(player1, self, data=data1)
+        else:
+            if self.GUI:
+                self.player1 = HumanGUI(self)
+            else:
+                self.player1 = Human(self)
+
+    def run_game(self,i):
+        """the main function that runs the game. _we stop the loop if
+        the loft of a player is 24 or more or if the number of seeds on the
+        board is below nb_seeds_end."""
+        if (self.nb_seeds_eaten < 48 - self.nb_seeds_end) \
+                and max(self.player0.loft, self.player1.loft) <= 24 \
+                and not (self.nb_seeds_eaten == 46 and self.end_game_is_blocked()):
+            #time.sleep(1)
+
+            if self.who_is_playing() == self.player0:
+                pit = self.who_is_playing().play(i)
+		
+                rslt_move = self.play(pit)
+            else :
+                pit = self.who_is_playing().play()
+                rslt_move = self.play(pit)
+	    print("ID resultat move",rslt_move)
+            print("ID PIT",pit)
+            #if rslt_move==False:
+      	    if (self.nb_seeds_eaten > 48 - self.nb_seeds_end) or max(self.player0.loft, self.player1.loft) > 24 or (self.nb_seeds_eaten == 46 and self.end_game_is_blocked()):
+		updateBoard()
+		print("ID AQUIIIII1")
+                return self.end_of_game()
+            if rslt_move == "END":
+                print("ID AQUIIIII2")
+                self.who_is_playing().add_to_loft(48 - self.nb_seeds_eaten)
+                return self.end_of_game()
+            # the game stopped, the staying seeds arent touched
+            elif rslt_move == "STOP":
+                print("ID AQUIIIII3")
+                return self.end_of_game()
+            elif rslt_move :
+		print("ID AQUIIIII4")
+                return rslt_move
+	    elif rslt_move ==False:
+		alert("Case vide ou coup affame advesaire, choisissez autre case")
+		return False
+
+
+
+        return self.end_of_game()
+
+    def allowed(self, pit, board=None, is_playing=None):
+
+        if board is None:
+            board = self.b
+
+        else:
+            print(" ")
+        if is_playing is None:
+            is_playing = self.is_playing
+        try:
+            if pit not in range(6):
+                raise NotInYourSideError()  # _pit not included in [1,6]
+
+            if board.get_pit(pit + 6 * is_playing) == 0:
+		return False               
+	 # pit wanted is empty
+
+            b1 = deepcopy(board)
+            self.move(pit, board=b1, is_playing=is_playing)
+            # if opponents side is not empty
+            if not (b1.empty_side(1 - is_playing)):
+                return True
+
+            for move_simulated in range(6):
+                # we don't want to change the original board, just to know if it's allowed
+                b2 = deepcopy(board)
+                #   you must have a seed in the pit you could play
+                if board.get_pit(move_simulated + 6 * is_playing) != 0:
+                    self.move(move_simulated, board=b2, is_playing=is_playing)
+
+
+                    if not (b2.empty_side(1 - is_playing)):
+                        raise StarvationError()  # so the move is not licit
+
+            # it means the move has to be played but it ends the game
+            return "END"
+        except NotInYourSideError as e:
+            print(e)
+            return False
+        except EmptyPitError as e:
+            print(e)
+            return False
+        except StarvationError as e:
+            print(e)
+            return False
+    def play(self, pit):
+        """function to use in order to play a move on the _board
+        it takes one argument : number of the pit wanted to be played"""
+        if pit == "END":
+            return "END"
+        if pit == "STOP":
+            return "STOP"
+	if pit == None and self.who_is_playing() == self.player0:
+	    return False;        
+	else:
+            self.move(pit)
+            return True
+
+    def move(self, pit, board=None, is_playing=None):
+        """function moving the seeds on the board and
+        it takes one argument : number of the last pit visited
+        returns number of seeds captured"""
+	
+        if board is None:
+            board = self.b
+        if is_playing is None:
+            is_playing = self.is_playing
+
+        pit += 6 * is_playing
+        nb_seeds = board.get_pit(pit)  # saving the number of seeds to sow
+        board.set_pit(pit, 0)
+        p = pit
+        while nb_seeds > 0:
+            p = (p + 1) % 12
+            if p != pit:  # _we dont put any seeds in the starting pit
+                board.add_pit(p, 1)
+                nb_seeds -= 1
+
+        # last seeds is indeed in opponents side and there is 2 or 3 seeds in the pit
+        seeds_eaten = 0
+        while (6 * (1 - is_playing) <= p <= 5 + 6 * (1 - is_playing)) and (2 <= board.get_pit(p) <= 3):
+            seeds_eaten += board.get_pit(p)
+            board.set_pit(p, 0)
+            p -= 1
+
+        # we only update the loft and the player if its a play on the real board
+        # we shouldnt move the seed on the board if we force the player
+        if board == self.b and is_playing == self.is_playing:
+            self.who_is_playing().add_to_loft(seeds_eaten)
+            self.is_playing = 1 - self.is_playing
+
+        return seeds_eaten
+
+    def who_is_playing(self):
+        if self.is_playing == 0:
+            return self.player0
+        else:
+            return self.player1
+
+    def end_of_game(self):
+
+        if self.player0.loft > self.player1.loft:  # return nb of the inner
+            return self.player0
+        elif self.player0.loft < self.player1.loft:
+            return self.player1
+        else:
+            return None
+
+    def end_game_is_blocked(self):
+        if self.b.board == [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]:
+            self.player0.add_to_loft(1)
+            self.player1.add_to_loft(1)
+            self.b = [0] * 12
+            return True
+        return False
+
+
+class Board:
+    def __init__(self):
+        self.board = [4 for i in range(12)]
+
+    def __repr__(self):
+        s = "  ====================j1=================\n"
+        s += "  ||"
+        for k in range(11, 5, -1):  # higher part
+            if self.board[k] // 10 == 0:
+                s += " " + str(self.board[k]) + "  | "
+            else:  # if nb_seeds >= 10
+                s += " " + str(self.board[k]) + " | "
+        s += "|\n"
+        s += "  =======================================\n"
+        s += "  ||"
+        for k in range(6):  # the lower part
+            if self.board[k] // 10 == 0:
+                s += " " + str(self.board[k]) + "  | "
+            else:  # if nb_seeds >= 10
+                s += " " + str(self.board[k]) + " | "
+        s += "|\n  ====================j0================="
+        return s
+
+    def get_pit(self, k):
+        return self.board[k]
+
+    def set_pit(self, k, val):
+        self.board[k] = val
+
+    def add_pit(self, k, val):
+        self.board[k] += val
+
+    def empty_side(self, player):
+        """_function looking if the side which first pit is ps is empty
+        it takes one argument : ps"""
+        for k in range(6 * player, 6 * player + 6):
+            if self.get_pit(k) != 0:
+
+                return False
+        return True
+class NotInYourSideError(Exception):
+    def __init__(self):
+        self.message = "You tried to play a pit that's not your side of the board !"
+
+    def __str__(self):
+        return self.message
+class EmptyPitError(Exception):
+    def __init__(self):
+        self.message = "You tried to play an empty pit"
+
+    def __str__(self):
+        return self.message
+class StarvationError(Exception):
+    def __init__(self):
+        self.message = "You mustn't starve your opponent"
+
+    def __str__(self):
+        return self.message
+class Player(ABC):
+    """Player is an abstract class which fathers IA and Human"""
+
+    def __init__(self, game):
+        self.game = game
+        self.loft = 0
+
+    @abstractmethod
+    def play(self):
+        pass
+
+    def add_to_loft(self, nb):
+        self.game.nb_seeds_eaten += nb
+        self.loft += nb
+class AI(Player):
+    """docstring for player."""
+
+    def __init__(self, algo, game, data=None):
+        super().__init__(game)
+        self.algo = algo
+
+        if  self.algo == "alphabeta":
+            if data is None:
+                data = [0.676061829383705, -0.4604896125458653, 0.7408590076155085, 0.3691310747575154]
+            self.algo = AlphaBeta(self.game, 2, data) 
+
+
+    def play(self):
+        return self.algo.play()
+class Human(Player):
+    """The CLI version of the Human player class that asks the input to the player"""
+    def __init__(self, game):
+        super().__init__(game)
+
+    def play(self,i):
+	pit = i
+	result = self.game.allowed(pit)
+
+	if result:
+	    return pit
+	else:
+	    print("This move is not allowed")
+	    return None
+
+            
+class AlphaBeta:
+    def __init__(self, game, depth, list_coeff_gain):
+        self.game = game
+        self.list_coeff_gain = list_coeff_gain
+        self.depth = depth
+        self.flag = "END"
+
+    def play(self):
+        evaluation, move = self.play_rec(self.depth, float("-inf"), float("inf"),
+                                         self.game.b, self.game.is_playing,
+                                         self.game.player0.loft, self.game.player1.loft)
+        return move
+
+    def play_rec(self, depth, alpha, beta, board, is_playing, loft0, loft1):
+        # we stop the simulation if this part of the simulation give us a winner.
+        if (depth == 0) or (loft0 > 24) or (loft1 > 24):
+            # _we declare attribute that will be used fo the gains
+            self.gain_board = board
+            self.gain_loft0 = loft0
+            self.gain_loft1 = loft1
+            return self.gain(), -1
+
+        best_move = self.flag
+
+        if is_playing == self.game.is_playing:
+            max_eval = -float('inf')
+            for move in range(6):
+                if self.game.allowed(move, board=board, is_playing=is_playing):
+                    b1 = deepcopy(board)
+                    seeds_eaten = self.game.move(move, board=b1, is_playing=is_playing)
+                    if is_playing == 0:
+                        loft0 += seeds_eaten
+                    else:
+                        loft1 += seeds_eaten
+                    eval, m = self.play_rec(depth - 1, alpha, beta, b1, 1 - is_playing, loft0, loft1)
+                    if eval > max_eval:
+                        max_eval = eval
+                        best_move = move
+                    alpha = max(alpha, eval)
+                    if beta <= alpha:
+                        break
+            return max_eval, best_move
+
+        else:
+            min_eval = float('inf')
+            for move in range(6):
+                if self.game.allowed(move, board=board, is_playing=is_playing):
+                    b1 = deepcopy(board)
+                    seeds_eaten = self.game.move(move, board=b1, is_playing=is_playing)
+                    if is_playing == 0:
+                        loft0 += seeds_eaten
+                    else:
+                        loft1 += seeds_eaten
+                    eval, m = self.play_rec(depth - 1, alpha, beta, b1, 1 - is_playing, loft0, loft1)
+                    if eval < min_eval:
+                        min_eval = eval
+                        best_move = move
+                    beta = min(beta, eval)
+                    if beta <= alpha:
+                        break
+            return min_eval, best_move
+
+    def gain(self):
+        a, b, c, d = self.list_coeff_gain
+        gain = self.gain0() + \
+               a * self.gain1() + \
+               b * self.gain2() + \
+               c * self.gain3() + \
+               d * self.gain4()
+        return gain
+
+    def gain0(self):
+        """_this gain updates the value of gain_m_a_b to inf if we won and to -inf
+        if we lost"""
+        if (self.game.is_playing == 0 and self.gain_loft0 > 24) or \
+                (self.game.is_playing == 1 and self.gain_loft1 > 24):
+            return 1000
+        elif (self.game.is_playing == 1 and self.gain_loft0 > 24) or \
+                (self.game.is_playing == 0 and self.gain_loft1 > 24):
+            return -1000
+        else:
+            return 0
+
+    def gain1(self):
+        # return our wined seeds
+        return (self.gain_loft0 * (1 - self.game.is_playing) + self.gain_loft1 * self.game.is_playing) / 24
+
+    def gain2(self):  # return our loosed seeds
+        return (self.gain_loft0 * self.game.is_playing + self.gain_loft1 * (1 - self.game.is_playing)) / 24
+
+    def gain3(self):
+        """_this gain returns a bad score if you have many pits
+        with 1 or 2 seeds in a row and a great score if the oppoenent has many pits
+        with 1 or 2 seeds in a row"""
+        GAIN_MAX = 504  # 504 max score {12*[(2*1)+(2*2)+...+(2*6)]}
+        gain = 0
+        successive = 1  # count the number of 1 or 2 seeds in a row
+        opponent = 1 - self.game.is_playing
+        for pit in range(6 * self.game.is_playing, 6 + 6 * self.game.is_playing):
+            sbp = self.game.b.get_pit(pit)
+            if (sbp == 1) or (sbp == 2):
+                gain -= 12 * sbp * successive
+                successive += 1
+            else:
+                successive = 1
+        for pit in range(6 * opponent, 6 + 6 * opponent):
+            sbp = self.game.b.get_pit(pit)
+            if (sbp == 1) or (sbp == 2):
+                gain += 8 * sbp * successive  # opponent plays first
+                successive += 1
+            else:
+                successive = 1
+        return gain / GAIN_MAX
+
+    def gain4(self):
+        """_this gain returns a bad score if you don't have a lot of possible moves"""
+        GAIN_MAX = 5
+        gain = 0
+        opponent = 1 - self.game.is_playing
+        for pit in range(6 * self.game.is_playing, 6 + 6 * self.game.is_playing):
+            if self.game.b.get_pit(pit) > 0:
+                gain += 1
+        for pit in range(6 * opponent, 6 + 6 * opponent):
+            if self.game.b.get_pit(pit) > 0:
+                gain -= 1
+        return gain / GAIN_MAX  # 5 max score {+6 -1}
+
+
+class AlphaBetaBegin(AlphaBeta):
+    def __init__(self, game, depth, list_coeff_gain):
+        super().__init__(game, depth, list_coeff_gain)
+        self.nb_seeds_begin = 5
+        self.flag = "STOP"
+
+    def play(self):
+        if (self.game.player0.loft >= self.nb_seeds_begin) or \
+                (self.game.player1.loft >= self.nb_seeds_begin):
+            return "STOP"
+        return super().play()
+
+
+class AlphaBetaMidgame(AlphaBeta):
+    def __init__(self, game, depth, list_coeff_gain):
+        super().__init__(game, depth, list_coeff_gain)
+        self.nb_seeds_midgame = 19
+        self.flag = "STOP"
+
+    def play(self):
+        # print(self.game.b)
+        if (self.game.player0.loft >= self.nb_seeds_midgame) or \
+                (self.game.player1.loft >= self.nb_seeds_midgame):
+            return "STOP"
+
+        return super().play()
+
+v1=['p1','p2','p3','p4','p5','p6','p7','p8','p9','p10','p11','p12',]
+v2=[11,10,9,8,7,6,0,1,2,3,4,5]
+v3=['d1','d2','d3','d4','d5','d6','d7','d8','d9','d10','d11','d12',]
+
+t=Test("human","alphabeta",10)
+t.run()
+
+
+def updateBoard():
+    for i in range(12) :
+	  
+          if t.game.b.board[v2[i]] <10:
+              document[v1[i]].src = "../../static/images/gui_graine"+str(t.game.b.board[v2[i]])+".png"
+              document[v3[i]].text=str(t.game.b.board[v2[i]])
+          else:
+              document[v1[i]].src = "../../static/images/gui_graine10.png"
+              document[v3[i]].text=str(t.game.b.board[v2[i]])
+    
+    print("ID",t.game.b)
+    document["01"].text= str(t.game.player1.loft)
+    document["02"].text= str(t.game.player0.loft)
+
+def runIA():
+    rslt=t.game.run_game(0)
+    print("ID  dentro", rslt)
+    if rslt==True:
+    	 updateBoard()
+    elif rslt==False:
+        return 1;
+    else:
+        newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+
+def newdiv_end():
+	test=document["plateau1"]
+	newdiv = html.DIV(id = "new-div")
+	newdiv.style = {
+	"line-height":" 2.5",
+	"font-size":" 20px",
+	"color":" #fff",
+	"text-shadow":" 1px 1px 1px #000",
+	"border-radius":" 10px",
+	"background-color":" #800000",
+	"background-image":" linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0))",
+	"box-shadow":" inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6)",
+	"width":" 920px",
+	"height":"40px",
+	"float":" right",
+	"text-align":" center"}
+	test<=newdiv 
+
+timeIA = 1500
+def montre1(ev):    
+    rslt=t.game.run_game(0)
+    print("ID  dentro", rslt)
+    if rslt==True:
+    	 updateBoard()
+	 timer.set_timeout(runIA, timeIA)
+    elif rslt==False:
+	 return 1;
+    else:
+	newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+
+
+
+def montre2(ev):
+    rslt=t.game.run_game(1)
+    print("ID  dentro", rslt)
+    if rslt==True:
+    	 updateBoard()
+	 timer.set_timeout(runIA, timeIA)
+    elif rslt==False:
+	 return 1;
+    else:
+	newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+
+
+def montre3(ev):
+    rslt=t.game.run_game(2)
+    print("ID  dentro", rslt)
+    if rslt==True:
+    	 updateBoard()
+	 timer.set_timeout(runIA, timeIA)
+    elif rslt==False:
+	 return 1;
+    else:
+	newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+
+def montre4(ev):
+    rslt=t.game.run_game(3)
+    print("ID  dentro", rslt)
+    if rslt==True:
+    	 updateBoard()
+	 timer.set_timeout(runIA, timeIA)
+    elif rslt==False:
+	 return 1;
+    else:
+	newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+def montre5(ev):
+    rslt=t.game.run_game(4)
+    print("ID  dentro", rslt)
+    if rslt==True:
+    	 updateBoard()
+	 timer.set_timeout(runIA, timeIA)
+    elif rslt==False:
+	 return 1;
+    else:
+	newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+
+
+def montre6(ev):
+    rslt=t.game.run_game(5)
+    if rslt==True:
+    	 updateBoard()
+	 timer.set_timeout(runIA, timeIA)
+    elif rslt==False:
+	 return 1;
+    else:
+	newdiv_end()
+	if rslt==t.game.player1 :
+	    document["new-div"].text= "AlphaBeta Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+	else:
+	    document["new-div"].text= "Human Wins !   "+"AlphaBeta: "+str(t.game.player1.loft)+"  Human: "+str(t.game.player0.loft)
+
+
+a1 = data = document["a7"]
+a1.bind("click", montre1)
+a2 = data = document["a8"]
+a2.bind("click", montre2)
+a3 = data = document["a9"]
+a3.bind("click", montre3)
+a4 = data = document["a10"]
+a4.bind("click", montre4)
+a5 = data = document["a11"]
+a5.bind("click", montre5)
+a6 = data = document["a12"]
+a6.bind("click", montre6)
+
+
+
+
+
+
+
+
+</script>
+</body>
+{% endblock %}

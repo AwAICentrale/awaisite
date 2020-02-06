@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login, authenticate, logout
 from accounts.forms import RegistrationForm, AuthenticationForm, AccountUpdateForm
 from accounts.models import Account
-from web.models import Article
 
 
 def registration_view(request):
@@ -17,7 +16,7 @@ def registration_view(request):
             raw_password = form.cleaned_data.get('password1')
             account = authenticate(email=email, password=raw_password)
             login(request, account)
-            return redirect('web:home')
+            return redirect('web:accueil')
         else:
             context['registration_form'] = form
     else:
@@ -28,14 +27,14 @@ def registration_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('web:home')
+    return redirect('web:accueil')
 
 
 def login_view(request):
     context = {}
     user = request.user
     if user.is_authenticated:
-        return redirect('web:home')
+        return redirect('web:accueil')
     if request.POST:
         form = AuthenticationForm(request.POST)
         if form.is_valid():
@@ -44,7 +43,7 @@ def login_view(request):
             user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
-                return redirect('web:home')
+                return redirect('web:accueil')
     else:
         form = AuthenticationForm()
     context['login_form'] = form
@@ -55,8 +54,6 @@ def account_view(request):
     context = {}
     user = request.user
     context['user'] = user
-    articles = Article.objects.filter(author=request.user)
-    context['articles'] = articles
     return render(request, 'accounts/profile.html', context)
 
 
@@ -65,12 +62,8 @@ def account_edit_view(request):
         return redirect('accounts:login')
     context = {}
     if request.POST:
-        form = AccountUpdateForm(request.POST, instance=request.user)
+        form = AccountUpdateForm(request.POST)
         if form.is_valid():
-            form.initial = {
-                "email": request.POST['email'],
-                "username": request.POST['username'],
-            }
             form.save()
     else:
         form = AccountUpdateForm(
