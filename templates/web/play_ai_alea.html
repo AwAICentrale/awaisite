@@ -1,0 +1,19 @@
+{% extends "../base_generic.html" %}
+{% load static %}
+{% block content %}
+    <script type="text/javascript" src="{% static 'js/brython.js' %}"/>
+    <script type="text/javascript" src="{% static 'js/brython_stdlib.js' %}"/>
+    <script onload="brython()" type="text/python" src="{% static "py/play_ai.py" %}"></script>
+    <script type="text/python">
+            from browser import document, alert
+
+            def echo(event):
+                alert(document["zone"].value)
+
+            document['mybutton'].bind('click', echo)
+
+    </script>
+    <input id="zone">
+    <button id="mybutton">click !</button>
+    </div>
+{% endblock %}
