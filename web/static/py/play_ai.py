@@ -561,26 +561,25 @@ class AlphaBetaMidgame(AlphaBeta):
 #
 #
 
-idCases = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', ]
+IDcases = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', ]
 conversion = [11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
-idQuantity = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', ]
-aiName = "alea"
+IDquantity = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', ]
 
-timeIA = 50  # temps de réponse IA
-
-t = Test("human", aiName, 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+t = Test("human", "alphabeta", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
 t.run()  # lance le jeu
+timeIA = 50  # temps de réponse IA
 
 
 def updateBoard():  # mettre à jour le plateau
+    alert("updating board")
     for i in range(12):
 
         if t.game.b.board[conversion[i]] < 10:
-            document[idCases[i]].src = "../../static/images/gui_graine" + str(t.game.b.board[conversion[i]]) + ".png"
-            document[idQuantity[i]].text = str(t.game.b.board[conversion[i]])
+            document[IDcases[i]].src = "../../static/images/gui_graine" + str(t.game.b.board[conversion[i]]) + ".png"
+            document[IDquantity[i]].text = str(t.game.b.board[conversion[i]])
         else:
-            document[idCases[i]].src = "../../static/images/gui_graine10.png"
-            document[idQuantity[i]].text = str(t.game.b.board[conversion[i]])
+            document[IDcases[i]].src = "../../static/images/gui_graine10.png"
+            document[IDquantity[i]].text = str(t.game.b.board[conversion[i]])
 
     print("Board", t.game.b)
     document["01"].text = str(t.game.player1.loft)
@@ -593,23 +592,23 @@ def runIA():  # L'IA fait son coup
     if rslt == True:
         updateBoard()
     elif rslt == False:
-        return 1;
+        return 1
     else:
         end_of_game_GUI(rslt)
 
 
 def end_of_game_GUI(rslt):  # verifie qui a gagné
-    endMessage()
+    newdiv_end()
     if isinstance(rslt, Human):
         document["new-div"].text = "Human Wins !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
     elif isinstance(rslt, AI):
         document["new-div"].text = "Game over !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
 
 
-def endMessage():  # div pour montrer qui a gagné
+def newdiv_end():  # div pour montrer qui a gagné
     test = document["plateau1"]
-    endMessage = html.DIV(id="end-message")
-    endMessage.style = {
+    newdiv = html.DIV(id="new-div")
+    newdiv.style = {
         "line-height": " 2.5",
         "font-size": " 20px",
         "color": " #fff",
@@ -622,7 +621,7 @@ def endMessage():  # div pour montrer qui a gagné
         "height": "40px",
         "float": " right",
         "text-align": " center"}
-    test <= endMessage
+    test <= newdiv
 
 
 # playCase fait le coup selon la case choisi
@@ -690,19 +689,16 @@ def playCase6(ev):
     elif rslt == False:
         return 1;
     else:
-        endMessage()
+        newdiv_end()
         if rslt == t.game.player1:
             document["new-div"].text = " Alea  Wins !   " + " Alea : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
         else:
             document["new-div"].text = "Human Wins !   " + " Alea : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
 
 
-def switchAi(ev):
-    aiName = select_minimax.innerHTML.lower()
-    alert(aiName)
-    t = Test("human", aiName, 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
-    t.run()  # lance le jeu
-    return aiName
+def echo(ev):
+    alert(select_test)
+    return 1
 
 
 # Les "add event listener click"
@@ -718,7 +714,5 @@ a5 = data = document["a11"]
 a5.bind("click", playCase5)
 a6 = data = document["a12"]
 a6.bind("click", playCase6)
-select_minimax = data = document["select_minimax"]
-select_minimax.bind("click", switchAi)
-select_alphabeta = data = document["select_alphabeta"]
-select_alphabeta.bind("click", switchAi)
+select_test = data = document["select_test"]
+select_test.bind("click", echo)

@@ -2,27 +2,149 @@
 {% load static %}
 {% block content %}
     <style>
-        .gui-background {
-            position: absolute;
+
+        #gui-display {
+            display: flex;
+        }
+
+        #main-display {
+            border: 1px solid #FFF;
+            padding: 1em;
+            border-radius: 5px;
+            background-color: #FFF;
+        }
+
+
+        #gui-board {
             max-width: 100%;
             max-height: 100%;
+            display: block;
+            position: relative;
+            text-align: center;
+        {#background-size: cover;#}{#background: url("../../static/images/gui_plateau.png") no-repeat center;#}{#height: 900px;#}
         }
+
+        #background-img {
+            width: 100%;
+            max-height: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .board-row {
+            z-index: 20;
+            justify-content: space-evenly;
+            position: absolute;
+            height: 50%;
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        #top-board {
+            top: 0;
+        }
+
+        #bottom-board {
+            bottom: 0;
+        }
+
+        .case {
+        {#border: solid 1px green;#} margin: 0.3em;
+            display: flex; /* center image with flex */
+            justify-content: center;
+        }
+
+        .case img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+            align-self: flex-start; /* to preserve image ratio */
+        }
+
+        #values {
+            justify-content: space-evenly;
+        }
+
+        #values div {
+            background-color: lightcoral;
+            margin: 0.5em;
+            flex-wrap: nowrap;
+            padding: 0.5em 2em;
+        }
+
+        #sidebar-menu {
+            border: 1px solid #FFF;
+            border-radius: 5px;
+            background-color: #FFF;
+            height: 100%;
+            text-align: center;
+        }
+
+        #side-bar
     </style>
-    <div class="row">
-        {#    <div class="col-lg-7 col-lg-offset-2 vh-100" style="border:1px solid #000;">#}
-        {#        <img class="gui-background" src="{% static "images/gui_plateau.png" %}" style="border:1px solid red;"/>#}
-        {#    </div>#}
-        <div class="gui-right-column col-lg-3 col-lg-offset-8 flex-column" style="border: solid 1px blue;">
-            <button onclick="testFunction()">testFunction</button>
-            <button onclick="testFunctionScript()">testScriptFunction</button>
+
+    <div class="row" id="gui-display">
+        <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
+            <div class="d-flex flex-row" id="values">
+                <div class="set" id="d1" case="0">4</div>
+                <div class="set" id="d2" case="1">4</div>
+                <div class="set" id="d3" case="2">4</div>
+                <div class="set" id="d4" case="3">4</div>
+                <div class="set" id="d5" case="4">4</div>
+                <div class="set" id="d6" case="5">4</div>
+            </div>
+            <div class="d-flex flex-column" id="gui-board">
+                <img id="background-img" src="{% static "images/gui_plateau.png" %}"/>
+                <div class="d-flex flex-row board-row" id="top-board">
+                    <div id="a1" class="case"><img id='p1' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a2" class="case"><img id='p2' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a3" class="case"><img id='p3' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a4" class="case"><img id='p4' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a5" class="case"><img id='p5' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a6" class="case"><img id='p6' src="{% static "images/gui_graine4.png" %}"></div>
+                </div>
+                <div class="d-flex flex-row board-row" id="bottom-board">
+                    <div id="a7" class="case"><img id='p7' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a8" class="case"><img id='p8' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a9" class="case"><img id='p9' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a10" class="case"><img id='p10' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a11" class="case"><img id='p11' src="{% static "images/gui_graine4.png" %}"></div>
+                    <div id="a12" class="case"><img id='p12' src="{% static "images/gui_graine4.png" %}"></div>
+                </div>
+            </div>
+            <div class="d-flex flex-row" id="values">
+                <div class="set" id="d7" case="6">4</div>
+                <div class="set" id="d8" case="7">4</div>
+                <div class="set" id="d9" case="8">4</div>
+                <div class="set" id="d10" case="9">4</div>
+                <div class="set" id="d11" case="10">4</div>
+                <div class="set" id="d12" case="11">4</div>
+            </div>
+        </div>
+        <div class="col-xl-3 ml-3 d-flex flex-column" id="sidebar-menu">
+            <div id="computer-prof">
+                <h5>Ordinateur <span><a href="#">niveau 1</a></span></h5>
+            </div>
+            <div id="user-prof"></div>
+            <div id="select_test" style="border: 1px solid black">Test</div>
         </div>
     </div>
-    <script src="{% static 'js/gui.js' %}"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script>
-        function testFunctionScript() {
-            window.alert("script tag test");
-        }
+    <script type="text/javascript" src="{% static "js/brython.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/brython_stdlib.js" %}"></script>
+    <body onload="brython()">
+    <script type="text/python" src="{% static "py/play_ai.py" %}"></script>
+    <script type="text/python">
+        from browser import document, alert
+
+        def echo(event):
+            alert(document["zone"].value)
+
+        document['mybutton'].bind('click', echo)
+
     </script>
+    <input id="zone">
+    <button id="mybutton">click !</button>
+    </body>
 {% endblock %}

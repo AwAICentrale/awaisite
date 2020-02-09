@@ -1,6 +1,5 @@
 html, body {
     font: 1em "Segoe UI", Helvetica, Arial, sans-serif;
-    background-color: #f2f2f2;
     height: 100%;
 }
 
@@ -13,6 +12,7 @@ html, body {
     -ms-flex-direction: column;
     flex-direction: column;
     min-height: 100%;
+    background-color: rgba(218, 224, 230, 1);
 }
 
 header, footer {
