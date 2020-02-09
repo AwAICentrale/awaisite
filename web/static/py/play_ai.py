@@ -564,10 +564,12 @@ class AlphaBetaMidgame(AlphaBeta):
 idCases = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', ]
 conversion = [11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
 idQuantity = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', ]
+aiName = "alea"
 
-t = Test("human", "alphabeta", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1) 
-t.run()  # lance le jeu
 timeIA = 50  # temps de réponse IA
+
+t = Test("human", aiName, 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+t.run()  # lance le jeu
 
 
 def updateBoard():  # mettre à jour le plateau
@@ -695,6 +697,14 @@ def playCase6(ev):
             document["new-div"].text = "Human Wins !   " + " Alea : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
 
 
+def switchAi(ev):
+    aiName = select_minimax.innerHTML.lower()
+    alert(aiName)
+    t = Test("human", aiName, 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+    t.run()  # lance le jeu
+    return aiName
+
+
 # Les "add event listener click"
 a1 = data = document["a7"]
 a1.bind("click", playCase1)
@@ -708,3 +718,7 @@ a5 = data = document["a11"]
 a5.bind("click", playCase5)
 a6 = data = document["a12"]
 a6.bind("click", playCase6)
+select_minimax = data = document["select_minimax"]
+select_minimax.bind("click", switchAi)
+select_alphabeta = data = document["select_alphabeta"]
+select_alphabeta.bind("click", switchAi)
