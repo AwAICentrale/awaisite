@@ -582,8 +582,8 @@ def updateBoard():  # mettre à jour le plateau
             document[IDquantity[i]].text = str(t.game.b.board[conversion[i]])
 
     print("Board", t.game.b)
-    document["01"].text = str(t.game.player1.loft)
-    document["02"].text = str(t.game.player0.loft)
+    #document["01"].text = str(t.game.player1.loft)
+    #document["02"].text = str(t.game.player0.loft)
 
 
 def runIA():  # L'IA fait son coup
@@ -689,12 +689,7 @@ def playCase6(ev):
     elif rslt == False:
         return 1;
     else:
-        newdiv_end()
-        if rslt == t.game.player1:
-            document["new-div"].text = " Alea  Wins !   " + " Alea : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
-        else:
-            document["new-div"].text = "Human Wins !   " + " Alea : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
-
+        end_of_game_GUI(rslt)
 
 def echo(ev):
     alert(select_test)
