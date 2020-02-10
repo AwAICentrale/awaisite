@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # my apps
     'web',
     'accounts',
+    'cookielaw',
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,6 +71,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
+            # 'libraries': [
+            #     'cookielaw_banner'
+            # ]
         },
     },
 ]
@@ -122,11 +127,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATICFILE_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
-#     os.path.join(BASE_DIR, 'media'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
+]
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')  # content delivery network
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')  # content delivery network
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')

@@ -37,6 +37,9 @@ def play_ai_view(request):
 def gui_test_view(request):
     return render(request, 'web/play_ai.html',)
 
+def bootstrap_test_view(request):
+    return render(request, 'web/bootstrap_test.html',)
+
 
 def play_ai_minimax_view(request):
     # question = get_object_or_404(Question, pk=question_id)
