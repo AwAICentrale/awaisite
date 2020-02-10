@@ -7,65 +7,77 @@
     .search-bar input {
         color: rgba(255, 255, 255, 0.8);
     }
-</style>
 
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-custom mb-3">
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'web:home' %}">Accueil<span
-                    class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'web:game_rules' %}">Règles</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'web:strategies' %}">Stratégie</a>
-        </li>
-        <!-- Dropdown -->
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Jouer
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="{% url 'web:play_ai' %}">Contre l'IA</a>
-                <a class="dropdown-item" href="#">Contre un autre joueur</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-               href="https://testawai.000webhostapp.com/phpBB3/?fbclid=IwAR3qp_W7ryX-q-POH9-FNzKP0cjA62FXDoet-EcUn-1aOYZHApfJ1HyV-Yo">Forums</a>
-        </li>
-    </ul>
-    <!-- Search bar -->
-    <div class="search-bar mt-sm-2 mr-2">
-        <form method="get">
-            <input type="text" class="form-control" name="q" id="id_q" placeholder="Rechercher...">
-        </form>
-    </div>
-    <!-- END Search bar -->
-    <div class="pull-right">
-        <ul class="nav navbar-nav">
-            {% if request.user.is_authenticated %}
-                <li>
-                    <a class="nav-link" href="{% url 'accounts:profile' %}">Mon Profil</a>
-                </li>
-                <li>
-                    <p style="color: rgba(255,255,255,0.8);margin-top:0.5em;">
-                        Bonjour, {{ request.user.username }} | <a href="{% url 'accounts:logout' %}">Déconnexion</a>
-                    </p>
-                </li>
-            {% else %}
-                <li>
-                    <a class="nav-link" href="{% url 'accounts:login' %}">Se connecter</a>
-                </li>
-            {% endif %}
+</style>
+{% load static %}
+<header class="py-3">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom align-items-center">
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'web:home' %}">
+                    <img src="{% static 'images/logo.png' %}" height="36" width="62"/></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'web:home' %}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'web:game_rules' %}">Règles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'web:strategies' %}">Stratégie</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Jouer
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'web:play_ai' %}">Contre l'IA</a>
+                    <a class="dropdown-item" href="#">Contre un autre joueur</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"
+                   href="https://testawai.000webhostapp.com/phpBB3/?fbclid=IwAR3qp_W7ryX-q-POH9-FNzKP0cjA62FXDoet-EcUn-1aOYZHApfJ1HyV-Yo">Forums</a>
+            </li>
         </ul>
-    </div>
-</nav>
+        <!-- Search bar -->
+        <div class="search-bar mt-sm-2 mr-2">
+            <form method="get">
+                <input type="text" class="form-control" name="q" id="id_q" placeholder="Rechercher...">
+            </form>
+        </div>
+        <!-- END Search bar -->
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <a class="nav-link" href="{% url 'accounts:profile' %}">Mon Profil</a>
+                    </li>
+                    <li>
+                        <p style="color: rgba(255,255,255,0.8);margin-top:0.5em;">
+                            Bonjour, {{ request.user.username }} | <a href="{% url 'accounts:logout' %}">Déconnexion</a>
+                        </p>
+                    </li>
+                {% else %}
+                    <li>
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Se connecter</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <script type="text/javascript">
-    document.getElementById("id_q").value = "{{ query }}"  // putting query directly in value in html tag does not work ?? }}
+    $(document).ready(function () {
+        document.getElementById("id_q").value = "{{ query }}"  // putting query directly in value in html tag does not work ?? }}
+
+        // make current page active
+        $('li.active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    })
 </script>

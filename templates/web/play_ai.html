@@ -82,6 +82,20 @@
             text-align: center;
         }
 
+        #computer-prof {
+            padding: 1em 2em;
+            background-color: grey;
+            position: absolute;
+            top: 0;
+        }
+
+        #user-prof {
+            padding: 1em 2em;
+            background-color: grey;
+            position: absolute;
+            bottom: 0;
+        }
+
         #side-bar
     </style>
 
@@ -127,7 +141,12 @@
             <div id="computer-prof">
                 <h5>Ordinateur <span><a href="#">niveau 1</a></span></h5>
             </div>
-            <div id="user-prof"></div>
+            <div id="score">
+
+            </div>
+            <div id="user-prof">
+                <h5>{{ user.username }}</h5>
+            </div>
             <div id="select_test" style="border: 1px solid black">Test</div>
         </div>
     </div>
