@@ -561,32 +561,30 @@ class AlphaBetaMidgame(AlphaBeta):
 #
 #
 
-IDcases = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', ]
+# Variables for GUI
+idCases = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', ]
 conversion = [11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
-IDquantity = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', ]
-
-t = Test("human", "alphabeta", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
-t.run()  # lance le jeu
-timeIA = 50  # temps de réponse IA
+idQuantity = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', ]
+t = Test("human", "alea", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+t.run()
+timeAi = 1000  # temps de réponse IA
 
 
 def updateBoard():  # mettre à jour le plateau
-    alert("updating board")
     for i in range(12):
-
         if t.game.b.board[conversion[i]] < 10:
-            document[IDcases[i]].src = "../../static/images/gui_graine" + str(t.game.b.board[conversion[i]]) + ".png"
-            document[IDquantity[i]].text = str(t.game.b.board[conversion[i]])
+            document[idCases[i]].src = "../../static/images/gui_graine" + str(t.game.b.board[conversion[i]]) + ".png"
+            document[idQuantity[i]].text = str(t.game.b.board[conversion[i]])
         else:
-            document[IDcases[i]].src = "../../static/images/gui_graine10.png"
-            document[IDquantity[i]].text = str(t.game.b.board[conversion[i]])
+            document[idCases[i]].src = "../../static/images/gui_graine10.png"
+            document[idQuantity[i]].text = str(t.game.b.board[conversion[i]])
 
     print("Board", t.game.b)
     #document["01"].text = str(t.game.player1.loft)
     #document["02"].text = str(t.game.player0.loft)
 
 
-def runIA():  # L'IA fait son coup
+def runAi():  # L'IA fait son coup
     rslt = t.game.run_game(0)
     print(rslt)
     if rslt == True:
@@ -629,7 +627,7 @@ def playCase1(ev):
     rslt = t.game.run_game(0)
     if rslt == True:
         updateBoard()
-        timer.set_timeout(runIA, timeIA)
+        timer.set_timeout(runAi, timeAi)
     elif rslt == False:
         return 1;
     else:
@@ -640,7 +638,7 @@ def playCase2(ev):
     rslt = t.game.run_game(1)
     if rslt == True:
         updateBoard()
-        timer.set_timeout(runIA, timeIA)
+        timer.set_timeout(runAi, timeAi)
     elif rslt == False:
         return 1;
     else:
@@ -651,7 +649,7 @@ def playCase3(ev):
     rslt = t.game.run_game(2)
     if rslt == True:
         updateBoard()
-        timer.set_timeout(runIA, timeIA)
+        timer.set_timeout(runAi, timeAi)
     elif rslt == False:
         return 1;
     else:
@@ -662,7 +660,7 @@ def playCase4(ev):
     rslt = t.game.run_game(3)
     if rslt == True:
         updateBoard()
-        timer.set_timeout(runIA, timeIA)
+        timer.set_timeout(runAi, timeAi)
     elif rslt == False:
         return 1;
     else:
@@ -674,7 +672,7 @@ def playCase5(ev):
 
     if rslt == True:
         updateBoard()
-        timer.set_timeout(runIA, timeIA)
+        timer.set_timeout(runAi, timeAi)
     elif rslt == False:
         return 1;
     else:
@@ -685,16 +683,35 @@ def playCase6(ev):
     rslt = t.game.run_game(5)
     if rslt == True:
         updateBoard()
-        timer.set_timeout(runIA, timeIA)
+        timer.set_timeout(runAi, timeAi)
     elif rslt == False:
         return 1;
     else:
         end_of_game_GUI(rslt)
 
-def echo(ev):
-    alert(select_test)
+def alea(ev):
+    alert("Alea")
+    global t
+    t = Test("human", "Alea", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+    t.run()
+    updateBoard()
     return 1
 
+def minimax(ev):
+    alert("Minimax")
+    global t
+    t = Test("human", "minimax", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+    t.run()
+    updateBoard()
+    return 1
+
+def alphabeta(ev):
+    alert("AlphaBeta")
+    global t
+    t = Test("human", "alphabeta", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+    t.run()
+    updateBoard()
+    return 1
 
 # Les "add event listener click"
 a1 = data = document["a7"]
@@ -709,5 +726,13 @@ a5 = data = document["a11"]
 a5.bind("click", playCase5)
 a6 = data = document["a12"]
 a6.bind("click", playCase6)
-select_test = data = document["select_test"]
-select_test.bind("click", echo)
+
+run_alea = data = document["alea"]
+run_alea.bind("click", alea)
+
+run_minimax = data = document["minimax"]
+run_minimax.bind("click", minimax)
+
+run_alphabeta = data = document["alphabeta"]
+run_alphabeta.bind("click", alphabeta)
+
