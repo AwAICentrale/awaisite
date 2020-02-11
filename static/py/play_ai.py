@@ -84,7 +84,6 @@ class Game:
             elif rslt_move:
                 return rslt_move
             elif rslt_move == False:
-                alert("Case vide ou coup affame advesaire, choisissez autre case")
                 return False
 
         return self.end_of_game()
@@ -570,7 +569,18 @@ t.run()
 timeAi = 1000  # temps de réponse IA
 
 
-def updateBoard():  # mettre à jour le plateau
+# launch game
+def play_ai(ev):
+    alert(ev.target.id)
+    global t
+    t = Test("human", ev.target.id, 1)
+    t.run()
+    updateBoard()
+    return 1
+
+
+# mettre à jour la gui
+def updateBoard():
     for i in range(12):
         if t.game.b.board[conversion[i]] < 10:
             document[idCases[i]].src = "../../static/images/gui_graine" + str(t.game.b.board[conversion[i]]) + ".png"
@@ -578,161 +588,74 @@ def updateBoard():  # mettre à jour le plateau
         else:
             document[idCases[i]].src = "../../static/images/gui_graine10.png"
             document[idQuantity[i]].text = str(t.game.b.board[conversion[i]])
-
     print("Board", t.game.b)
-    #document["01"].text = str(t.game.player1.loft)
-    #document["02"].text = str(t.game.player0.loft)
+    document["score-ai"].text = str(t.game.player1.loft)
+    document["score-user"].text = str(t.game.player0.loft)
 
 
+# faire jouer l'IA
 def runAi():  # L'IA fait son coup
-    rslt = t.game.run_game(0)
-    print(rslt)
-    if rslt == True:
+    rslt = t.game.run_game(0)  # le nombre n'est pas pris en compte par l'IA
+    print("ai result" + str(rslt))
+    if rslt:
         updateBoard()
-    elif rslt == False:
+    elif not rslt:
         return 1
     else:
-        end_of_game_GUI(rslt)
+        create_end_message(rslt)
 
 
-def end_of_game_GUI(rslt):  # verifie qui a gagné
-    newdiv_end()
+# faire jouer le joueur selon la case choisie
+def playCase(ev):
+    idText = int(ev.target.id[1:])
+    var = idText - 7
+    rslt = t.game.run_game(var)
+    print("user result" + str(rslt))
+    if rslt:
+        updateBoard()
+        timer.set_timeout(runAi, timeAi)
+    elif not rslt:
+        gui = document["main-display"]
+        errorMessage = html.DIV(id="error-message", Class="alert alert-warning alert-dismissible")
+        errorMessage.text = "Case vide ou votre coup affame l'adversaire, choisissez une autre case."
+        gui <= errorMessage
+        return 1
+    else:
+        create_end_message(rslt)
+
+
+# faire apparaître msg de victoire ou défaite
+def create_end_message(rslt):  # div pour montrer qui a gagné
+    alert("end message")
+    gui = document["main-display"]
+    endMessage = html.DIV(id="end-message", Class="alert")
+    gui <= endMessage
+    print(gui)
     if isinstance(rslt, Human):
-        document["new-div"].text = "Human Wins !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
+        document["end-message"].text = "Human Wins !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
     elif isinstance(rslt, AI):
-        document["new-div"].text = "Game over !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
+        document["end-message"].text = "Game over !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
 
 
-def newdiv_end():  # div pour montrer qui a gagné
-    test = document["plateau1"]
-    newdiv = html.DIV(id="new-div")
-    newdiv.style = {
-        "line-height": " 2.5",
-        "font-size": " 20px",
-        "color": " #fff",
-        "text-shadow": " 1px 1px 1px #000",
-        "border-radius": " 10px",
-        "background-color": " #800000",
-        "background-image": " linear-gradient(to top left, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2) 30%, rgba(0, 0, 0, 0))",
-        "box-shadow": " inset 2px 2px 3px rgba(255, 255, 255, .6), inset -2px -2px 3px rgba(0, 0, 0, .6)",
-        "width": " 920px",
-        "height": "40px",
-        "float": " right",
-        "text-align": " center"}
-    test <= newdiv
-
-
-# playCase fait le coup selon la case choisi
-def playCase1(ev):
-    rslt = t.game.run_game(0)
-    if rslt == True:
-        updateBoard()
-        timer.set_timeout(runAi, timeAi)
-    elif rslt == False:
-        return 1;
-    else:
-        end_of_game_GUI(rslt)
-
-
-def playCase2(ev):
-    rslt = t.game.run_game(1)
-    if rslt == True:
-        updateBoard()
-        timer.set_timeout(runAi, timeAi)
-    elif rslt == False:
-        return 1;
-    else:
-        end_of_game_GUI(rslt)
-
-
-def playCase3(ev):
-    rslt = t.game.run_game(2)
-    if rslt == True:
-        updateBoard()
-        timer.set_timeout(runAi, timeAi)
-    elif rslt == False:
-        return 1;
-    else:
-        end_of_game_GUI(rslt)
-
-
-def playCase4(ev):
-    rslt = t.game.run_game(3)
-    if rslt == True:
-        updateBoard()
-        timer.set_timeout(runAi, timeAi)
-    elif rslt == False:
-        return 1;
-    else:
-        end_of_game_GUI(rslt)
-
-
-def playCase5(ev):
-    rslt = t.game.run_game(4)
-
-    if rslt == True:
-        updateBoard()
-        timer.set_timeout(runAi, timeAi)
-    elif rslt == False:
-        return 1;
-    else:
-        end_of_game_GUI(rslt)
-
-
-def playCase6(ev):
-    rslt = t.game.run_game(5)
-    if rslt == True:
-        updateBoard()
-        timer.set_timeout(runAi, timeAi)
-    elif rslt == False:
-        return 1;
-    else:
-        end_of_game_GUI(rslt)
-
-def alea(ev):
-    alert("Alea")
-    global t
-    t = Test("human", "Alea", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
-    t.run()
-    updateBoard()
-    return 1
-
-def minimax(ev):
-    alert("Minimax")
-    global t
-    t = Test("human", "minimax", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
-    t.run()
-    updateBoard()
-    return 1
-
-def alphabeta(ev):
-    alert("AlphaBeta")
-    global t
-    t = Test("human", "alphabeta", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
-    t.run()
-    updateBoard()
-    return 1
-
-# Les "add event listener click"
-a1 = data = document["a7"]
-a1.bind("click", playCase1)
-a2 = data = document["a8"]
-a2.bind("click", playCase2)
-a3 = data = document["a9"]
-a3.bind("click", playCase3)
-a4 = data = document["a10"]
-a4.bind("click", playCase4)
-a5 = data = document["a11"]
-a5.bind("click", playCase5)
-a6 = data = document["a12"]
-a6.bind("click", playCase6)
+# click listeners
+case1 = data = document["a7"]
+case1.bind("click", playCase)
+case2 = data = document["a8"]
+case2.bind("click", playCase)
+case3 = data = document["a9"]
+case3.bind("click", playCase)
+case4 = data = document["a10"]
+case4.bind("click", playCase)
+case5 = data = document["a11"]
+case5.bind("click", playCase)
+case6 = data = document["a12"]
+case6.bind("click", playCase)
 
 run_alea = data = document["alea"]
-run_alea.bind("click", alea)
+run_alea.bind("click", play_ai)
 
 run_minimax = data = document["minimax"]
-run_minimax.bind("click", minimax)
+run_minimax.bind("click", play_ai)
 
 run_alphabeta = data = document["alphabeta"]
-run_alphabeta.bind("click", alphabeta)
-
+run_alphabeta.bind("click", play_ai)

@@ -101,17 +101,18 @@
             cursor: pointer;
         }
 
+        /* messages that appear*/
     </style>
 
     <div class="row my-5" id="gui-display">
         <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
             <div class="d-flex flex-row" id="values">
-                <div class="set" id="d1" case="0">4</div>
-                <div class="set" id="d2" case="1">4</div>
-                <div class="set" id="d3" case="2">4</div>
-                <div class="set" id="d4" case="3">4</div>
-                <div class="set" id="d5" case="4">4</div>
-                <div class="set" id="d6" case="5">4</div>
+                <div class="set" id="d1">4</div>
+                <div class="set" id="d2">4</div>
+                <div class="set" id="d3">4</div>
+                <div class="set" id="d4">4</div>
+                <div class="set" id="d5">4</div>
+                <div class="set" id="d6">4</div>
             </div>
             <div class="d-flex flex-column" id="gui-board">
                 <img id="background-img" src="{% static "images/gui_plateau.png" %}"/>
@@ -133,31 +134,34 @@
                 </div>
             </div>
             <div class="d-flex flex-row" id="values">
-                <div class="set" id="d7" case="6">4</div>
-                <div class="set" id="d8" case="7">4</div>
-                <div class="set" id="d9" case="8">4</div>
-                <div class="set" id="d10" case="9">4</div>
-                <div class="set" id="d11" case="10">4</div>
-                <div class="set" id="d12" case="11">4</div>
+                <div class="set" id="d7">4</div>
+                <div class="set" id="d8">4</div>
+                <div class="set" id="d9">4</div>
+                <div class="set" id="d10">4</div>
+                <div class="set" id="d11">4</div>
+                <div class="set" id="d12">4</div>
             </div>
         </div>
         <div class="col-xl-3 ml-3 d-flex flex-column" id="sidebar-menu">
-{#            <div id="top-player" class="d-flex flex-row py-2">#}
-{#                <div class="enclosed-icon">#}
-{#                    <a onclick="showSettings()"><i class="fas fa-microchip fa-3x"></i></a>#}
-{#                </div>#}
-{#                <div class="user-tagline">#}
-{#                    <h5>Ordinateur <span><a href="#">niveau 1</a></span></h5>#}
-{#                </div>#}
-{#            </div>#}
+            {#            <div id="top-player" class="d-flex flex-row py-2">#}
+            {#                <div class="enclosed-icon">#}
+            {#                    <a onclick="showSettings()"><i class="fas fa-microchip fa-3x"></i></a>#}
+            {#                </div>#}
+            {#                <div class="user-tagline">#}
+            {#                    <h5>Ordinateur <span><a href="#">niveau 1</a></span></h5>#}
+            {#                </div>#}
+            {#            </div>#}
             <div class="flex-column mt-6">
                 <p id="alphabeta" style="border: solid 1px blue">Alphabeta</p>
                 <p id="minimax" style="border: solid 1px blue">Minimax</p>
                 <p id="alea" style="border: solid 1px blue">Alea</p>
             </div>
-{#            <div id="score" class="d-flex flex-column" style="border: 1px solid red">#}
-{#                <#}
-{#            </div>#}
+            <div id="results" class="d-flex flex-column" style="border: 1px solid red">
+                <label for="score-ai">AI score</label>
+                <div id="score-ai">0</div>
+                <label for="score-user">User score</label>
+                <div id="score-user">0</div>
+            </div>
             <div id="bottom-player" class="d-flex flex-row py-2">
                 <div class="enclosed-icon">
                     <i class="fas fa-user fa-3x"></i>
@@ -172,5 +176,6 @@
     <script type="text/javascript" src="{% static "js/brython_stdlib.js" %}"></script>
     <body onload="brython()">
     <script type="text/python" src="{% static "py/play_ai.py" %}"></script>
+    <button id="end-message">Click me</button>
     </body>
 {% endblock %}
