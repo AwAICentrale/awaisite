@@ -1,0 +1,29 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block content %}
+
+    <style>
+        div {
+            border: 1px solid blue;
+        }
+
+    </style>
+    <div class="row d-flex flex-row">
+        <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
+            <p>Content</p>
+            <div class="content" style="height: 500px;"></div>
+        </div>
+        <div class="col-xl-3 col-xl-offset-2 h-100 d-flex flex-column ml-4" id="main-display">
+            <p>Sidebar content</p>
+        </div>
+    </div>
+    <div class="row d-flex flex-row">
+        <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
+            <p>Content</p>
+            <div class="content" style="height: 500px;"></div>
+        </div>
+        <div class="col-xl-3 col-xl-offset-2 h-100 d-flex flex-column ml-4" id="main-display">
+            <p>Sidebar content</p>
+        </div>
+    </div>
+{% endblock %}

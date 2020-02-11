@@ -14,54 +14,53 @@
             color: grey;
         }
     </style>
-    <div class="content">
-        <h2>Mon profil</h2>
-        {#      <h5>{{ user.image }}</h5>#}
-        <div class="row">
-            <label for="email" class="col-sm-2">Adresse mail</label>
-            <h5 id="email" class="col-sm-10">{{ user.email }}</h5>
-        </div>
-        <div class="row">
-            <label for="username" class="col-sm-2">Nom d'utilisateur</label>
-            <h5 id="username" class="col-sm-10">{{ user.username }}</h5>
-        </div>
-        <div class="row">
-            <label for="last_login" class="col-sm-2">Dernière connexion</label>
-            <h5 id="last_login" class="col-sm-10">{{ user.last_login }}</h5>
-        </div>
-        <div class="row col-lg-8" id="statistics">
-            <div class="flex-column text-center">
-                <label for="games_played">Nombre de parties jouées</label><h5 id="games_played">{{ user.games_played }}</h5>
+    <div class="content py-4">
+        <div class="container d-flex flex-column">
+            <h2>Mon profil</h2>
+            {#      <h5>{{ user.image }}</h5>#}
+            <div class="row">
+                <label for="email" class="col-sm-2">Adresse mail</label>
+                <h5 id="email" class="col-sm-10">{{ user.email }}</h5>
             </div>
-            <div class="flex-column text-center">
-                <label for="nb_wins">Parties gagnées</label><h5 id="nb_wins">{{ user.wins }}</h5>
+            <div class="row">
+                <label for="username" class="col-sm-2">Nom d'utilisateur</label>
+                <h5 id="username" class="col-sm-10">{{ user.username }}</h5>
             </div>
-            <div class="flex-column text-center">
-                <label for="alea_wins">Contre aléa</label><h5 id="alea_wins">{{ user.alea_wins }}</h5>
+            <div class="row">
+                <label for="last_login" class="col-sm-2">Dernière connexion</label>
+                <h5 id="last_login" class="col-sm-10">{{ user.last_login }}</h5>
             </div>
-            <div class="flex-column text-center">
-                <label for="minimax_wins">Contre minimax</label><h5 id="minimax_wins">{{ user.minimax_wins }}</h5>
+            <div class="row col-lg-8" id="statistics">
+                <div class="flex-column text-center">
+                    <label for="games_played">Nombre de parties jouées</label><h5 id="games_played">{{ user.games_played }}</h5>
+                </div>
+                <div class="flex-column text-center">
+                    <label for="nb_wins">Parties gagnées</label><h5 id="nb_wins">{{ user.wins }}</h5>
+                </div>
+                <div class="flex-column text-center">
+                    <label for="alea_wins">Contre aléa</label><h5 id="alea_wins">{{ user.alea_wins }}</h5>
+                </div>
+                <div class="flex-column text-center">
+                    <label for="minimax_wins">Contre minimax</label><h5 id="minimax_wins">{{ user.minimax_wins }}</h5>
+                </div>
+                <div class="flex-column text-center">
+                    <label for="alphabeta_wins">Contre alphabeta</label><h5 id="alphabeta_wins">{{ user.alphabeta_wins }}</h5>
+                </div>
             </div>
-            <div class="flex-column text-center">
-                <label for="alphabeta_wins">Contre alphabeta</label><h5 id="alphabeta_wins">{{ user.alphabeta_wins }}</h5>
+            <div>
+                <a href="{% url 'accounts:profile_edit' %}">Modifier</a>
             </div>
-        </div>
-    </div>
-    <div>
-        <a href="{% url 'accounts:profile_edit' %}">Modifier</a>
-    </div>
-
-    <div class="container mt-4 p-4">
-        <div class="row">
-            <div class="article">
-                <h3 class="mb-3 font-weight-normal">Articles :</h3>
-                <ul>
-                    {% for article in articles %}
-                        <a href="{% url 'web:detail_article' article.slug %}" style="text-decoration: none;">
-                            <li class="list-group-item">{{ article }}</li>
-                        </a>
-                    {% endfor %}
-                </ul>
+            <div class="row">
+                <div class="article">
+                    <h3 class="mb-3 font-weight-normal">Articles :</h3>
+                    <ul>
+                        {% for article in articles %}
+                            <a href="{% url 'web:detail_article' article.slug %}" style="text-decoration: none;">
+                                <li class="list-group-item">{{ article }}</li>
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

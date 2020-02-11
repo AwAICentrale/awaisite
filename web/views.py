@@ -32,10 +32,10 @@ def strategies_view(request):
 
 def play_ai_view(request):
     # question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'web/play_ai_alea.html', )
+    return render(request, 'web/play_ai.html', )
 
 def gui_test_view(request):
-    return render(request, 'web/play_ai.html',)
+    return render(request, 'web/play_ai_alea.html',)
 
 def bootstrap_test_view(request):
     return render(request, 'web/bootstrap_test.html',)

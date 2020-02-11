@@ -1,13 +1,37 @@
 <style type="text/css">
-    .footer {
-        min-height: 100px;
+    #footer {
+        background-color: #800000;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    #footer a:hover {
+        color: rgba(255, 255, 255, 1);
+        cursor: pointer;
+    }
+
+    #footer div {
+        margin: auto;
+    }
+    .footer-link {
+        font-size: 0.8rem;
+    }
+
+    .footer-link:after {
+        color: hsla(0, 0%, 100%, .7);
+        content: " | ";
     }
 </style>
 
-<footer class="py-3">
+<!-- footer -->
+<div id="footer" class="container-fluid d-flex flex-row">
     <!-- Footer Elements -->
-    <div class="container mb-1">
-
+    <!-- Links -->
+    <div class="text-center col-3 d-flex flex-row flex-wrap">
+        <a class="footer-link">Aide</a>
+        <a class="footer-link"> Contrat d'utilisation</a>
+        <a class="footer-link"> Politique de confidentialité</a>
+    </div>
+    <div class="col-6 mt-3">
         <!-- Social buttons -->
         <ul class="list-inline text-center">
             <li class="list-inline-item">
@@ -31,10 +55,9 @@
     <!-- Footer Elements -->
 
     <!-- Copyright -->
-    <div class="text-center">
+    <div class="text-center col-3" style="font-size: 0.8rem;">
         © 2020 Copyright: Projet AWAI
     </div>
     <!-- Copyright -->
-
-</footer>
+</div>
 <!-- End Footer -->
