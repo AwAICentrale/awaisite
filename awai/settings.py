@@ -24,7 +24,7 @@ SECRET_KEY = '*7e8&@kp#dfys%7#3*ywn0sw0fuphy4r#-6=js&cwd4+ei+b3b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://pizi.pythonanywhere.com']
+ALLOWED_HOSTS = ['pizi.pythonanywhere.com']
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # During development only
