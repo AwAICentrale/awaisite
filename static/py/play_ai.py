@@ -571,18 +571,17 @@ aiName = ""
 
 # launch game
 def play_ai(ev):
-    change_difficulty_button_style(ev)
     global t
     global aiFirst
     bind_click(aiFirst)
     if aiFirst == False:
         create_turn_indicator(aiFirst)
-        t = Test("human", ev.target.id, 1)
+        t = Test("human", aiName, 1)
         t.run()
         updateBoard()
     else:
         create_turn_indicator(aiFirst)
-        t = Test(ev.target.id, "human", 1)
+        t = Test(aiName, "human", 1)
         t.run()
         runAi()
         updateBoard()
@@ -604,7 +603,7 @@ def updateBoard():
 
 # faire jouer l'IA
 def runAi():  # L'IA fait son coup
-    aiTurn = True
+    aiTurn = False
     create_turn_indicator(aiTurn)
     rslt = t.game.run_game(0)  # le nombre n'est pas pris en compte par l'IA
     print("ai result" + str(rslt))
@@ -625,7 +624,7 @@ def playCase(ev):
     else:
         var = idText
     print("var : " + str(var))
-    aiTurn = False
+    aiTurn = True
     create_turn_indicator(aiTurn)
     rslt = t.game.run_game(var)
     print("user result" + str(rslt))
@@ -650,7 +649,7 @@ def create_end_message(rslt):  # div pour montrer qui a gagné
     closeBtn = html.BUTTON(Class="close", data_dismiss="alert", aria_label="close")
     span = html.SPAN(aria_hidden="true")
     x = html.I(Class="fa fa-times")
-    newGameBtn = html.BUTTON(Class="btn-sidebar close", id="newgame", onclick="showSettings()", data_dismiss="alert")
+    newGameBtn = html.BUTTON(Class="btn ml-3 mr-auto", id="newgame", onclick="showSettings()", data_dismiss="alert")
     newGameBtn.text = "Nouvelle partie"
     span <= x
     closeBtn <= span
@@ -672,17 +671,22 @@ def create_error_message():
     gui <= errorMessage
 
 
+# def update_statistics(rslt):
+#     if isinstance(rslt, Human):
+#
+#     elif isinstance(rslt, AI):
+#         endMessage.text = "L'ordinateur gagne !   " + "IA : " + str(t.game.player1.loft) + "  Vous: " + str(t.game.player0.loft)
+
 def create_turn_indicator(aiTurn):
     if document["turn-indicator"]:
         del document["turn-indicator"]
     gui = document["results"]
     turnIndicator = html.DIV(id="turn-indicator", Class="alert alert-info")
-    if aiTurn == False:
+    if aiTurn == True:
         turnIndicator.text = "L'IA réfléchit..."
     else:
         turnIndicator.text = "A vous de jouer !"
     gui <= turnIndicator
-
 
 
 def change_first(ev):
@@ -693,6 +697,13 @@ def change_first(ev):
     elif ev.target.id == "humanFirst":
         aiFirst = False
 
+
+def change_ai(ev):
+    global aiName
+    aiName = ev.target.id
+    change_difficulty_button_style(ev)
+    difficulty = document["difficulty-label"]
+    difficulty.text = ev.target.text
 
 def change_difficulty_button_style(ev):
     btns = document["difficulty-select"].select('a')
@@ -787,13 +798,19 @@ def new_game(ev):
 
 
 run_alea = data = document["alea"]
-run_alea.bind("click", play_ai)
+run_alea.bind("click", change_ai)
 
 run_minimax = data = document["minimax"]
-run_minimax.bind("click", play_ai)
+run_minimax.bind("click", change_ai)
 
-run_alphabeta = data = document["alphabeta"]
-run_alphabeta.bind("click", play_ai)
+run_alphabeta2 = data = document["alphabeta2"]
+run_alphabeta2.bind("click", change_ai)
+
+run_alphabeta4 = data = document["alphabeta4"]
+run_alphabeta4.bind("click", change_ai)
+
+run_alphabeta8 = data = document["alphabeta8"]
+run_alphabeta8.bind("click", change_ai)
 
 is_aiFirst = data = document["aiFirst"]
 is_aiFirst.bind("click", change_first)
@@ -802,3 +819,15 @@ is_humanFirst.bind("click", change_first)
 
 newgame = data = document["newgame"]
 newgame.bind("click", new_game)
+
+start = data = document["settings-save"]
+start.bind("click", play_ai)
+
+def testfunction(ev):
+    return 1
+
+
+test = data = document["test"]
+test.bind("click", testfunction)
+
+diff1_wins = data = document["diff2_update"]

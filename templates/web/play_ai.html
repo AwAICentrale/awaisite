@@ -53,6 +53,9 @@
             justify-content: center;
         }
 
+        .case:hover {
+            cursor: pointer;
+        }
         .case img {
             max-width: 100%;
             max-height: 100%;
@@ -159,12 +162,30 @@
             z-index: 950;
             position: absolute;
             top: 4em;
+        }
+
+        #error-message {
             left: 20%;
             width: 60%;
         }
 
+        #end-message {
+            left: 10%;
+            width: 80%;
+        }
+
+        #end-message #newgame{
+            background-color: lightcoral;
+            border: 1px solid #800000;
+            color: #fff;
+        }
+        #end-message #newgame:hover{
+            background-color: #800000;
+        }
+
+
         #sidebar-menu div {
-            {#border: solid 1px red;#}
+        {#border: solid 1px red;#}
         }
 
         #turn-indicator {
@@ -212,7 +233,7 @@
         <div id="game-settings" class="game-popup">
             <div class="modal-header pb-0">
                 <h6>Options</h6>
-                <i class="fas fa-times" onclick="hideSettings()"></i>
+                <i id="settings-save" class="fas fa-times" onclick="hideSettings()"></i>
             </div>
             <div class="modal-body">
                 <div id="difficulty-select" class="game-settings-component">
@@ -226,13 +247,13 @@
                                 <a class="btn" id="minimax">2</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn" id="alphabeta">3</a>
+                                <a class="btn" id="alphabeta2">3</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn" id="alphabeta2">4</a>
+                                <a class="btn" id="alphabeta4">4</a>
                             </li>
                             <li class="list-inline-item">
-                                <a class="btn" id="alphabeta4">5</a>
+                                <a class="btn" id="alphabeta8">5</a>
                             </li>
                         </ul>
                     </div>
@@ -258,7 +279,7 @@
                     <i class="fas fa-microchip fa-3x" onclick="showSettings()"></i>
                 </div>
                 <div class="user-tagline">
-                    <h5>Ordinateur <a href="#" class="nav-link" onclick="showSettings()">niveau 1</a></h5>
+                    <h5>Ordinateur <a href="#" class="nav-link" onclick="showSettings()">niveau <span id="difficulty-label">1</span></a></h5>
                 </div>
             </div>
             <div id="results" class="d-flex flex-column justify-content-around">
@@ -295,6 +316,24 @@
             </div>
         </div>
     </div>
+    <form id="statistics-update" action="{% url 'web:statistics_test' %}" method=POST style="visibility: visible">{% csrf_token %}
+        <input id="winner" type="checkbox" value=""/>
+        <select id="statistics-update-ai">
+            <option value="diff1_wins"></option>
+            <option value="diff2_wins"></option>
+            <option value="diff3_wins"></option>
+            <option value="diff4_wins"></option>
+            <option value="diff5_wins"></option>
+        </select>
+        {#        <input id="diff1_update" type="text" value=""/>#}
+        {#        <input id="diff2_update" type="text" value=""/>#}
+        {#        <input id="diff3_update" type="text" value=""/>#}
+        {#        <input id="diff4_update" type="text" value=""/>#}
+        {#        <input id="diff5_update" type="text" value=""/>#}
+        <button type="button" class="btn-sidebar" id="test">
+            Test
+        </button>
+    </form>
     <script type="text/javascript" src="{% static "js/brython.js" %}"></script>
     <script type="text/javascript" src="{% static "js/brython_stdlib.js" %}"></script>
     <body onload="brython()">
@@ -310,6 +349,24 @@
             popup.classList.toggle("show");
         }
 
+        $('#test').on('click', function () {
+            let aiName = $('#statistics-update-ai option:selected');
+            $.ajax({
+                url: '{% url 'web:statistics_test' %}',
+                data: {
+                    'aiName': aiName
+                }
+            })
+            console.log("aiName : " + aiName);
+        });
+
+        $('input[name=checkbox]').change(function () {
+            if (this.prop(':checked')) {
+                console.log("checked")
+            } else {
+                console.log("unchecked")
+            }
+        });
     </script>
     </body>
 {% endblock %}
