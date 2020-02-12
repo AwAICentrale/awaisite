@@ -62,7 +62,7 @@ class Game:
                 and not (self.nb_seeds_eaten == 46 and self.end_game_is_blocked()):
             # time.sleep(1)
 
-            if self.who_is_playing() == self.player0:
+            if isinstance(self.who_is_playing(), Human):
                 pit = self.who_is_playing().play(i)
 
                 rslt_move = self.play(pit)
@@ -339,7 +339,7 @@ class Human(Player):
             return None
 
 
-# IAs classes            
+# IAs classes
 
 class Alea:
     def __init__(self, game):
@@ -561,22 +561,31 @@ class AlphaBetaMidgame(AlphaBeta):
 #
 
 # Variables for GUI
-idCases = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', ]
+idCases = ['p11', 'p10', 'p9', 'p8', 'p7', 'p6', 'p0', 'p1', 'p2', 'p3', 'p4', 'p5', ]
 conversion = [11, 10, 9, 8, 7, 6, 0, 1, 2, 3, 4, 5]
-idQuantity = ['d1', 'd2', 'd3', 'd4', 'd5', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', ]
-t = Test("human", "alea", 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
-t.run()
+idQuantity = ['d11', 'd10', 'd9', 'd8', 'd7', 'd6', 'd0', 'd1', 'd2', 'd3', 'd4', 'd5']
 timeAi = 1000  # temps de réponse IA
+aiFirst = False
+aiName = ""
 
 
 # launch game
 def play_ai(ev):
-    alert(ev.target.id)
+    change_difficulty_button_style(ev)
     global t
-    t = Test("human", ev.target.id, 1)
-    t.run()
-    updateBoard()
-    return 1
+    global aiFirst
+    bind_click(aiFirst)
+    if aiFirst == False:
+        create_turn_indicator(aiFirst)
+        t = Test("human", ev.target.id, 1)
+        t.run()
+        updateBoard()
+    else:
+        create_turn_indicator(aiFirst)
+        t = Test(ev.target.id, "human", 1)
+        t.run()
+        runAi()
+        updateBoard()
 
 
 # mettre à jour la gui
@@ -595,11 +604,13 @@ def updateBoard():
 
 # faire jouer l'IA
 def runAi():  # L'IA fait son coup
+    aiTurn = True
+    create_turn_indicator(aiTurn)
     rslt = t.game.run_game(0)  # le nombre n'est pas pris en compte par l'IA
     print("ai result" + str(rslt))
-    if rslt:
+    if rslt == True:
         updateBoard()
-    elif not rslt:
+    elif rslt == False:
         return 1
     else:
         create_end_message(rslt)
@@ -608,17 +619,21 @@ def runAi():  # L'IA fait son coup
 # faire jouer le joueur selon la case choisie
 def playCase(ev):
     idText = int(ev.target.id[1:])
-    var = idText - 7
+
+    if idText > 5:
+        var = idText - 6
+    else:
+        var = idText
+    print("var : " + str(var))
+    aiTurn = False
+    create_turn_indicator(aiTurn)
     rslt = t.game.run_game(var)
     print("user result" + str(rslt))
-    if rslt:
+    if rslt == True:
         updateBoard()
         timer.set_timeout(runAi, timeAi)
-    elif not rslt:
-        gui = document["main-display"]
-        errorMessage = html.DIV(id="error-message", Class="alert alert-warning alert-dismissible")
-        errorMessage.text = "Case vide ou votre coup affame l'adversaire, choisissez une autre case."
-        gui <= errorMessage
+    elif rslt == False:
+        create_error_message()
         return 1
     else:
         create_end_message(rslt)
@@ -626,30 +641,150 @@ def playCase(ev):
 
 # faire apparaître msg de victoire ou défaite
 def create_end_message(rslt):  # div pour montrer qui a gagné
-    alert("end message")
     gui = document["main-display"]
-    endMessage = html.DIV(id="end-message", Class="alert")
-    gui <= endMessage
-    print(gui)
+    endMessage = html.DIV(id="end-message", Class="alert alert-danger alert-dismissible")
     if isinstance(rslt, Human):
-        document["end-message"].text = "Human Wins !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
+        endMessage.text = "Vous avez gagné !   " + "IA : " + str(t.game.player1.loft) + "  Vous: " + str(t.game.player0.loft)
     elif isinstance(rslt, AI):
-        document["end-message"].text = "Game over !   " + "IA : " + str(t.game.player1.loft) + "  Human: " + str(t.game.player0.loft)
+        endMessage.text = "L'ordinateur gagne !   " + "IA : " + str(t.game.player1.loft) + "  Vous: " + str(t.game.player0.loft)
+    closeBtn = html.BUTTON(Class="close", data_dismiss="alert", aria_label="close")
+    span = html.SPAN(aria_hidden="true")
+    x = html.I(Class="fa fa-times")
+    newGameBtn = html.BUTTON(Class="btn-sidebar close", id="newgame", onclick="showSettings()", data_dismiss="alert")
+    newGameBtn.text = "Nouvelle partie"
+    span <= x
+    closeBtn <= span
+    endMessage <= closeBtn
+    endMessage <= newGameBtn
+    gui <= endMessage
+
+
+def create_error_message():
+    gui = document["main-display"]
+    errorMessage = html.DIV(id="error-message", Class="alert alert-warning alert-dismissible")
+    errorMessage.text = "Case vide ou votre coup affame l'adversaire, choisissez une autre case."
+    closeBtn = html.BUTTON(Class="close", data_dismiss="alert", aria_label="close")
+    span = html.SPAN(aria_hidden="true")
+    x = html.I(Class="fa fa-times")
+    span <= x
+    closeBtn <= span
+    errorMessage <= closeBtn
+    gui <= errorMessage
+
+
+def create_turn_indicator(aiTurn):
+    if document["turn-indicator"]:
+        del document["turn-indicator"]
+    gui = document["results"]
+    turnIndicator = html.DIV(id="turn-indicator", Class="alert alert-info")
+    if aiTurn == False:
+        turnIndicator.text = "L'IA réfléchit..."
+    else:
+        turnIndicator.text = "A vous de jouer !"
+    gui <= turnIndicator
+
+
+
+def change_first(ev):
+    change_firstplayer_button_style(ev)
+    global aiFirst
+    if ev.target.id == "aiFirst":
+        aiFirst = True
+    elif ev.target.id == "humanFirst":
+        aiFirst = False
+
+
+def change_difficulty_button_style(ev):
+    btns = document["difficulty-select"].select('a')
+    for btn in btns:
+        btn.style = {"background-color": "#cacac9", }
+    ev.target.style = {"background-color": "#666463", }
+
+
+def change_firstplayer_button_style(ev):
+    btns = document["play-buttons"].select('a')
+    for btn in btns:
+        btn.style = {"background-color": "#cacac9", }
+    ev.target.style = {"background-color": "#666463", }
 
 
 # click listeners
-case1 = data = document["a7"]
-case1.bind("click", playCase)
-case2 = data = document["a8"]
-case2.bind("click", playCase)
-case3 = data = document["a9"]
-case3.bind("click", playCase)
-case4 = data = document["a10"]
-case4.bind("click", playCase)
-case5 = data = document["a11"]
-case5.bind("click", playCase)
-case6 = data = document["a12"]
-case6.bind("click", playCase)
+def bind_click(aiFirst):
+    unbind_click()
+    if aiFirst == False:
+        case1 = data = document["a0"]
+        case1.bind("click", playCase)
+        case2 = data = document["a1"]
+        case2.bind("click", playCase)
+        case3 = data = document["a2"]
+        case3.bind("click", playCase)
+        case4 = data = document["a3"]
+        case4.bind("click", playCase)
+        case5 = data = document["a4"]
+        case5.bind("click", playCase)
+        case6 = data = document["a5"]
+        case6.bind("click", playCase)
+    else:
+        case7 = data = document["a6"]
+        case7.bind("click", playCase)
+        case8 = data = document["a7"]
+        case8.bind("click", playCase)
+        case9 = data = document["a8"]
+        case9.bind("click", playCase)
+        case10 = data = document["a9"]
+        case10.bind("click", playCase)
+        case11 = data = document["a10"]
+        case11.bind("click", playCase)
+        case12 = data = document["a11"]
+        case12.bind("click", playCase)
+
+
+def unbind_click():
+    case1 = data = document["a0"]
+    case2 = data = document["a1"]
+    case3 = data = document["a2"]
+    case4 = data = document["a3"]
+    case5 = data = document["a4"]
+    case6 = data = document["a5"]
+    case7 = data = document["a6"]
+    case8 = data = document["a7"]
+    case9 = data = document["a8"]
+    case10 = data = document["a9"]
+    case11 = data = document["a10"]
+    case12 = data = document["a11"]
+    case1.unbind("click", playCase)
+    case2.unbind("click", playCase)
+    case3.unbind("click", playCase)
+    case4.unbind("click", playCase)
+    case5.unbind("click", playCase)
+    case6.unbind("click", playCase)
+    case7.unbind("click", playCase)
+    case8.unbind("click", playCase)
+    case9.unbind("click", playCase)
+    case10.unbind("click", playCase)
+    case11.unbind("click", playCase)
+    case12.unbind("click", playCase)
+
+
+def init_page():
+    global t
+    aiName = "alea"
+    t = Test("human", aiName, 1)  # Essayez t=Test("human","alea",1) et t=Test("human","alphabeta",1)
+    t.run()
+    bind_click(aiFirst)
+
+
+init_page()
+
+
+# new game
+def new_game(ev):
+    global t
+    t = Test("human", aiName, 1)
+    t.run()
+    updateBoard()
+    return 1
+
 
 run_alea = data = document["alea"]
 run_alea.bind("click", play_ai)
@@ -659,3 +794,11 @@ run_minimax.bind("click", play_ai)
 
 run_alphabeta = data = document["alphabeta"]
 run_alphabeta.bind("click", play_ai)
+
+is_aiFirst = data = document["aiFirst"]
+is_aiFirst.bind("click", change_first)
+is_humanFirst = data = document["humanFirst"]
+is_humanFirst.bind("click", change_first)
+
+newgame = data = document["newgame"]
+newgame.bind("click", new_game)

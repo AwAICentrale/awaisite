@@ -34,16 +34,14 @@ def play_ai_view(request):
     # question = get_object_or_404(Question, pk=question_id)
     return render(request, 'web/play_ai.html', )
 
-def gui_test_view(request):
-    return render(request, 'web/play_ai_alea.html',)
+
+def play_local_view(request):
+    # question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'web/play_local.html', )
+
 
 def bootstrap_test_view(request):
-    return render(request, 'web/bootstrap_test.html',)
-
-
-def play_ai_minimax_view(request):
-    # question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'web/play_ai_minimax.html', )
+    return render(request, 'web/bootstrap_test.html', )
 
 
 def create_article_view(request):
@@ -113,8 +111,3 @@ def get_article_queryset(query=None):
             queryset.append(article)
 
     return list(set(queryset))  # make sure list is unique
-
-
-def ajax_test_view(request):
-    context = {}
-    return render(request, 'web/ajax_test.html', context)

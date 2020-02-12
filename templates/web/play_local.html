@@ -124,22 +124,15 @@
             visibility: visible;
         }
 
-        #game-settings .modal-body ul li #alea, #game-settings .modal-body ul li #humanFirst {
-            background-color: #666463;
-        }
-
-        #game-settings .modal-body ul li a {
-            color: #ffffff;
+        #difficulty-select div li a {
+            color: #fff;
             background-color: #cacac9;
             cursor: pointer;
-            height: 100%;
-            width: 100%;
         }
 
-        .game-settings-component div li a:hover {
+        #difficulty-select div li a:active {
             background-color: #666463;
         }
-
 
         .fa-times:hover {
             cursor: pointer;
@@ -155,21 +148,6 @@
         }
 
         /* messages that appear*/
-        #error-message, #end-message {
-            z-index: 950;
-            position: absolute;
-            top: 4em;
-            left: 20%;
-            width: 60%;
-        }
-
-        #sidebar-menu div {
-            {#border: solid 1px red;#}
-        }
-
-        #turn-indicator {
-            width: 100%;
-        }
     </style>
     <div class="row my-5" id="gui-display">
         <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
@@ -209,75 +187,31 @@
                 <div class="set" id="d5">4</div>
             </div>
         </div>
-        <div id="game-settings" class="game-popup">
-            <div class="modal-header pb-0">
-                <h6>Options</h6>
-                <i class="fas fa-times" onclick="hideSettings()"></i>
-            </div>
-            <div class="modal-body">
-                <div id="difficulty-select" class="game-settings-component">
-                    <h6>Difficulté</h6>
-                    <div class="d-flex flex-row justify-content-around">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a class="btn" id="alea">1</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn" id="minimax">2</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn" id="alphabeta">3</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn" id="alphabeta2">4</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn" id="alphabeta4">5</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div id="play-buttons" class="game-settings-component">
-                    <h6>Jouer en</h6>
-                    <div class="d-flex flex-row justify-content-around">
-                        <ul class="list-inline text-center">
-                            <li class="list-inline-item">
-                                <a class="btn" id="humanFirst">1er</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="btn" id="aiFirst">2eme</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 ml-3 d-flex flex-column px-0 justify-content-between" id="sidebar-menu">
+        <div class="col-xl-3 ml-3 d-flex flex-column px-0" id="sidebar-menu">
             <div id="top-player" class="d-flex flex-row py-2">
                 <div class="enclosed-icon">
-                    <i class="fas fa-microchip fa-3x" onclick="showSettings()"></i>
+                    <i class="fas fa-user fa-3x"></i>
                 </div>
                 <div class="user-tagline">
-                    <h5>Ordinateur <a href="#" class="nav-link" onclick="showSettings()">niveau 1</a></h5>
+                    <a href="#" class="nav-link"><h4>Joueur A</h4></a>
                 </div>
             </div>
             <div id="results" class="d-flex flex-column justify-content-around">
                 <div class="d-flex flex-row justify-content-around">
-                    <label for="score-ai">AI score</label>
+                    <label for="score-ai">Score joueur A</label>
                     <div id="score-ai">0</div>
                 </div>
                 <div>
                     <h5>vs</h5>
                 </div>
                 <div class="d-flex flex-row justify-content-around">
-                    <label for="score-user">User score</label>
+                    <label for="score-user">Score joueur B</label>
                     <div id="score-user">0</div>
                 </div>
             </div>
-            <div id="turn-indicator"></div>
-            <div id="sidebar-options" class="py-1" style="border-top: solid 1px lightgrey;">
+            <div id="sidebar-options" class="pt-3" style="border-top: solid 1px lightgrey;">
                 <!-- Button trigger new game menu -->
-                <button id="newgame" type="button" class="btn-sidebar" onclick="showSettings()">
+                <button type="button" class="btn-sidebar" onclick="showNewGame()">
                     Nouvelle partie
                 </button>
                 <!-- Button trigger settings menu -->
@@ -290,7 +224,7 @@
                     <i class="fas fa-user fa-3x"></i>
                 </div>
                 <div class="user-tagline">
-                    <a href="{% url 'accounts:profile' %}" class="nav-link"><h4>{{ user.username }}</h4></a>
+                    <a href="#" class="nav-link"><h4>Joueur B</h4></a>
                 </div>
             </div>
         </div>
@@ -298,18 +232,6 @@
     <script type="text/javascript" src="{% static "js/brython.js" %}"></script>
     <script type="text/javascript" src="{% static "js/brython_stdlib.js" %}"></script>
     <body onload="brython()">
-    <script type="text/python" src="{% static "py/play_ai.py" %}"></script>
-    <script type="text/javascript">
-        function showSettings() {
-            let popup = document.getElementById("game-settings");
-            popup.classList.toggle("show");
-        }
-
-        function hideSettings() {
-            let popup = document.getElementById("game-settings");
-            popup.classList.toggle("show");
-        }
-
-    </script>
+    <script type="text/python" src="{% static "py/play_local.py" %}"></script>
     </body>
 {% endblock %}
