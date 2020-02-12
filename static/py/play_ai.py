@@ -823,11 +823,5 @@ newgame.bind("click", new_game)
 start = data = document["settings-save"]
 start.bind("click", play_ai)
 
-def testfunction(ev):
-    return 1
-
-
-test = data = document["test"]
-test.bind("click", testfunction)
 
 diff1_wins = data = document["diff2_update"]

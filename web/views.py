@@ -6,6 +6,7 @@ from accounts.models import Account
 from web.models import Article
 from web.forms import CreateArticleForm, UpdateArticleForm
 from operator import attrgetter
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home_view(request):
@@ -111,3 +112,29 @@ def get_article_queryset(query=None):
             queryset.append(article)
 
     return list(set(queryset))  # make sure list is unique
+
+
+@csrf_exempt
+def statistics_test(request):
+    print(request.POST)
+    if request.POST:
+        if 'aiName' in request.POST and 'isWinner' in request.POST:
+            aiName = request.POST['aiName']
+            isWinner = request.POST['isWinner']
+            user = request.user
+            user.games_played += 1
+            if isWinner == "true":
+                user.wins += 1
+            if aiName == "diff1_update":
+                user.diff1_wins += 1
+            elif aiName == "diff2_update":
+                user.diff2_wins += 1
+            elif aiName == "diff3_update":
+                user.diff3_wins += 1
+            elif aiName == "diff4_update":
+                user.diff4_wins += 1
+            elif aiName == "diff5_update":
+                user.diff5_wins += 1
+
+            return HttpResponse("success")
+    return HttpResponse("fail")

@@ -51,6 +51,15 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
+    #  statistics
+    games_played = models.PositiveIntegerField(default=0)
+    wins = models.PositiveIntegerField(default=0)  # losses = games_played - wins
+    diff1_wins = models.PositiveIntegerField(default=0)
+    diff2_wins = models.PositiveIntegerField(default=0)
+    diff3_wins = models.PositiveIntegerField(default=0)
+    diff4_wins = models.PositiveIntegerField(default=0)
+    diff5_wins = models.PositiveIntegerField(default=0)
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
 

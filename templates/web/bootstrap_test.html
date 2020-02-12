@@ -7,23 +7,44 @@
             border: 1px solid blue;
         }
 
+        .game-popup {
+            background-color: #fff;
+            position: absolute;
+            height: 330px;
+            width: 330px;
+            top: 60px;
+            left: 50px;
+            margin-left: 165px;
+            border-radius: 3px;
+            overflow: hidden;
+            z-index: 950;
+            transition: all .3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+        }
+
+        #game-settings.show {
+            visibility: visible;
+        }
+
+        .game-popup {
+            visibility: hidden;
+        }
+
+
     </style>
     <div class="row d-flex flex-row">
-        <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
-            <p>Content</p>
-            <div class="content" style="height: 500px;"></div>
-        </div>
-        <div class="col-xl-3 col-xl-offset-2 h-100 d-flex flex-column ml-4" id="main-display">
-            <p>Sidebar content</p>
-        </div>
-    </div>
-    <div class="row d-flex flex-row">
-        <div class="col-xl-8 col-xl-offset-2 h-100 d-flex flex-column" id="main-display">
-            <p>Content</p>
-            <div class="content" style="height: 500px;"></div>
-        </div>
-        <div class="col-xl-3 col-xl-offset-2 h-100 d-flex flex-column ml-4" id="main-display">
-            <p>Sidebar content</p>
+        <button type="button" class="btn btn-primary" onclick="showSettings()">
+            show settings()
+        </button>
+        <div id="game-settings" class="game-popup">
+            Some content here
         </div>
     </div>
+    <script type="text/javascript">
+        let settingsPopup = document.getElementById("game-settings");
+
+        function showSettings() {
+            settingsPopup.classList.toggle("show");
+        }
+    </script>
 {% endblock %}

@@ -56,6 +56,7 @@
         .case:hover {
             cursor: pointer;
         }
+
         .case img {
             max-width: 100%;
             max-height: 100%;
@@ -174,12 +175,13 @@
             width: 80%;
         }
 
-        #end-message #newgame{
+        #end-message #newgame {
             background-color: lightcoral;
             border: 1px solid #800000;
             color: #fff;
         }
-        #end-message #newgame:hover{
+
+        #end-message #newgame:hover {
             background-color: #800000;
         }
 
@@ -257,6 +259,27 @@
                             </li>
                         </ul>
                     </div>
+                    <h6>Jouer contre un fantôme</h6>
+                    <h6>Difficulté</h6>
+                    <div class="d-flex flex-row justify-content-around">
+                        <ul class="list-inline text-center">
+                            <li class="list-inline-item">
+                                <a class="btn" id="fantome0">1</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn" id="fantome2">2</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn" id="fantome4">3</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn" id="fantome6">4</a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="btn" id="fantome8">5</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div id="play-buttons" class="game-settings-component">
                     <h6>Jouer en</h6>
@@ -302,8 +325,8 @@
                     Nouvelle partie
                 </button>
                 <!-- Button trigger settings menu -->
-                <button type="button" class="btn-sidebar" onclick="showNewGame()" disabled>
-                    Options
+                <button id="update-stats" type="button" class="btn-sidebar" onclick="update()">
+                    Update
                 </button>
             </div>
             <div id="bottom-player" class="d-flex flex-row py-2">
@@ -316,29 +339,19 @@
             </div>
         </div>
     </div>
-    <form id="statistics-update" action="{% url 'web:statistics_test' %}" method=POST style="visibility: visible">{% csrf_token %}
-        <input id="winner" type="checkbox" value=""/>
-        <select id="statistics-update-ai">
-            <option value="diff1_wins"></option>
-            <option value="diff2_wins"></option>
-            <option value="diff3_wins"></option>
-            <option value="diff4_wins"></option>
-            <option value="diff5_wins"></option>
-        </select>
-        {#        <input id="diff1_update" type="text" value=""/>#}
-        {#        <input id="diff2_update" type="text" value=""/>#}
-        {#        <input id="diff3_update" type="text" value=""/>#}
-        {#        <input id="diff4_update" type="text" value=""/>#}
-        {#        <input id="diff5_update" type="text" value=""/>#}
-        <button type="button" class="btn-sidebar" id="test">
-            Test
-        </button>
+    <form id="statistics-update" action="{% url 'web:statistics_test' %}" method="POST" style="visibility: visible">{% csrf_token %}
+        <div id="difficulty-level">
+            <input id="diff1_update" type="text" value="0"/>
+            <input id="diff2_update" type="text" value="0"/>
+            <input id="diff3_update" type="text" value="0"/>
+            <input id="diff4_update" type="text" value="0"/>
+            <input id="diff5_update" type="text" value="0"/>
+        </div>
     </form>
     <script type="text/javascript" src="{% static "js/brython.js" %}"></script>
     <script type="text/javascript" src="{% static "js/brython_stdlib.js" %}"></script>
-    <body onload="brython()">
-    <script type="text/python" src="{% static "py/play_ai.py" %}"></script>
     <script type="text/javascript">
+        let URL = "{% url 'web:statistics_test' %}";  //statistics update url
         function showSettings() {
             let popup = document.getElementById("game-settings");
             popup.classList.toggle("show");
@@ -349,24 +362,28 @@
             popup.classList.toggle("show");
         }
 
-        $('#test').on('click', function () {
-            let aiName = $('#statistics-update-ai option:selected');
-            $.ajax({
-                url: '{% url 'web:statistics_test' %}',
-                data: {
-                    'aiName': aiName
-                }
-            })
-            console.log("aiName : " + aiName);
-        });
-
-        $('input[name=checkbox]').change(function () {
-            if (this.prop(':checked')) {
-                console.log("checked")
-            } else {
-                console.log("unchecked")
-            }
-        });
+        function update() {
+            {#let aiName = "";#}
+            {#$('#difficulty-level input').each(function () {#}
+            {#    if (this.value == 1) {#}
+            {#        aiName = this.id;#}
+            {#    }#}
+                       {#let isWinner = true;#}
+            {#let data = {#}
+            {#    'aiName': aiName,#}
+            {#    'isWinner': isWinner,#}
+                        {#$.ajax({#}
+            {#    method: "POST", URL, data, function(response) {#}
+            {#        if (response == 'success') {#}
+            {#            alert("success");#}
+            {#        } else {#}
+            {#            alert("error !");#}
+            {#        }#}
+            {#    }#}
+            {#console.log("aiName : " + aiName);#}
+        }
     </script>
+    <body onload="brython()">
+    <script type="text/python" src="{% static "py/play_ai.py" %}"></script>
     </body>
 {% endblock %}
