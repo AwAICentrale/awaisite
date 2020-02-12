@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     # my apps
     'web',
     'accounts',
-    'cookielaw',
+    # 'cookielaw',
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',
