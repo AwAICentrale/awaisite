@@ -339,7 +339,7 @@
             </div>
         </div>
     </div>
-    <form id="statistics-update" action="{% url 'web:statistics_test' %}" method="POST" style="visibility: visible">{% csrf_token %}
+    <form id="statistics-update" action="{% url 'web:statistics_test' %}" method="POST" style="visibility: hidden">{% csrf_token %}
         <div id="difficulty-level">
             <input id="diff1_update" type="text" value="0"/>
             <input id="diff2_update" type="text" value="0"/>
@@ -352,6 +352,24 @@
     <script type="text/javascript" src="{% static "js/brython_stdlib.js" %}"></script>
     <script type="text/javascript">
         let URL = "{% url 'web:statistics_test' %}";  //statistics update url
+        function getCookie(name) { //csrftoken
+            let cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                let cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let csrftoken = getCookie('csrftoken');
+
         function showSettings() {
             let popup = document.getElementById("game-settings");
             popup.classList.toggle("show");
@@ -369,10 +387,9 @@
                     aiName = this.id;
                 }
             });
-            let isWinner = true;
             let data = {
                 'aiName': aiName,
-                'isWinner': isWinner,
+                'csrfmiddlewaretoken': csrftoken,
             };
             $.ajax({
                 method: "POST", URL, data, function(response) {
@@ -384,6 +401,9 @@
                 }
             });
             console.log("aiName : " + aiName);
+            $('#difficulty-level input').each(function () {
+                this.value = 0;
+            });
         }
     </script>
     <body onload="brython()">

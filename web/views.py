@@ -116,7 +116,7 @@ def get_article_queryset(query=None):
 
 @csrf_exempt
 def statistics_test(request):
-    print(request.POST)
+    print("we are in")
     if request.POST:
         if 'aiName' in request.POST:
             aiName = request.POST['aiName']

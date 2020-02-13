@@ -658,6 +658,7 @@ def create_end_message(rslt):  # div pour montrer qui a gagné
     gui <= endMessage
 
 
+
 def create_error_message():
     gui = document["main-display"]
     errorMessage = html.DIV(id="error-message", Class="alert alert-warning alert-dismissible")
