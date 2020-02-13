@@ -363,24 +363,27 @@
         }
 
         function update() {
-            {#let aiName = "";#}
-            {#$('#difficulty-level input').each(function () {#}
-            {#    if (this.value == 1) {#}
-            {#        aiName = this.id;#}
-            {#    }#}
-                       {#let isWinner = true;#}
-            {#let data = {#}
-            {#    'aiName': aiName,#}
-            {#    'isWinner': isWinner,#}
-                        {#$.ajax({#}
-            {#    method: "POST", URL, data, function(response) {#}
-            {#        if (response == 'success') {#}
-            {#            alert("success");#}
-            {#        } else {#}
-            {#            alert("error !");#}
-            {#        }#}
-            {#    }#}
-            {#console.log("aiName : " + aiName);#}
+            let aiName = "";
+            $('#difficulty-level input').each(function () {
+                if (this.value == 1) {
+                    aiName = this.id;
+                }
+            });
+            let isWinner = true;
+            let data = {
+                'aiName': aiName,
+                'isWinner': isWinner,
+            };
+            $.ajax({
+                method: "POST", URL, data, function(response) {
+                    if (response == 'success') {
+                        alert("success");
+                    } else {
+                        alert("error !");
+                    }
+                }
+            });
+            console.log("aiName : " + aiName);
         }
     </script>
     <body onload="brython()">

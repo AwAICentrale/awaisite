@@ -21,7 +21,6 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('web.urls')),
     path('accounts/', include('accounts.urls')),
     # Password reset (ref:  https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     # Temporarily here before url fixes in accounts
@@ -39,6 +38,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
          name='password_reset_complete'),
+    path('', include('web.urls')),
 ]
 
 if settings.DEBUG:

@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate, logout
 from accounts.forms import RegistrationForm, AuthenticationForm, AccountUpdateForm
 from accounts.models import Account
 from web.models import Article
+from django.db.models import Sum, F
 
 
 def registration_view(request):
@@ -58,6 +59,8 @@ def account_view(request):
     context['user'] = user
     articles = Article.objects.filter(author=request.user)
     context['articles'] = articles
+    user.wins = user.diff1_wins + user.diff2_wins + user.diff3_wins + user.diff4_wins + user.diff5_wins
+    user.save()
     return render(request, 'accounts/profile.html', context)
 
 

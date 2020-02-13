@@ -118,13 +118,10 @@ def get_article_queryset(query=None):
 def statistics_test(request):
     print(request.POST)
     if request.POST:
-        if 'aiName' in request.POST and 'isWinner' in request.POST:
+        if 'aiName' in request.POST:
             aiName = request.POST['aiName']
-            isWinner = request.POST['isWinner']
             user = request.user
             user.games_played += 1
-            if isWinner == "true":
-                user.wins += 1
             if aiName == "diff1_update":
                 user.diff1_wins += 1
             elif aiName == "diff2_update":
@@ -135,6 +132,6 @@ def statistics_test(request):
                 user.diff4_wins += 1
             elif aiName == "diff5_update":
                 user.diff5_wins += 1
-
+            user.save()
             return HttpResponse("success")
     return HttpResponse("fail")
